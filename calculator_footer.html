@@ -1,109 +1,193 @@
 <script>
+    // Inputs - Transactability
     const input_transactabilityAssumption = $("#transactability-assumption");
-    const input_transactabilityQuarters = $("#transactability-quarters");
-    const input_transactabilitySchedule = $("#transactability-schedule");
-
+    const input_transactabilityQuartersRamp = $("#transactability-quarters-ramp");
+    const input_transactabilityRamping = $("#transactability-ramping");
+    // Input - ASP % + Assumption / Target
     const input_aspAssumption = $("#asp-assumption");
-
+    // Inputs - Win Rate % + Assumption
     const input_winRateAssumption = $("#win-rate-assumption");
+    // Inputs - Reciprocity
+    const input_reciprocityAssumption = $("#reciprocity-assumption");
+    const input_reciprocityQuartersBefore = $("#reciprocity-quarters-before");
+    const input_reciprocityQuartersRamp = $("#reciprocity-quarters-ramp");
+    const input_reciprocityRamping = $("#reciprocity-ramping");
+    // Inputs - Baselines
+    const input_baselineAnnualRevenue = $("#baseline-annual-revenue");
+    const input_baselineAverageSellingPrice = $("#baseline-average-selling-price");
+    const input_baselineBaseWinRate = $("#baseline-base-win-rate");
+    const input_baselineEstAnnualGrowth = $("#baseline-est-annual-growth");
+    const input_baselineQ1 = $("#baseline-q1");
+    const input_baselineQ2 = $("#baseline-q2");
+    const input_baselineQ3 = $("#baseline-q3");
 
-    const input_reciprocityAssumption = $("#co-sell-assumption");
-    const input_reciprocityQuartersBefore = $("#co-sell-quarters-before");
-    const input_reciprocityQuarters = $("#co-sell-quarters");
-    const input_reciprocitySchedule = $("#co-sell-schedule");
+    // Results - Baselines
+    const result_baselineAnnualPipelineTarget = $("#baseline-annual-pipeline-target");
+    const result_baselineAnnualOpportunities = $("#baseline-annual-opportunities");
+    const result_baselineQ4 = $("#baseline-q4");
 
-    const input_annualRevenue = $("#annual-revenue");
-    const input_averageSellingPrice = $("#average-selling-price");
-    const input_annualPipelineTarget = $("#annual-pipeline-target");
-    const input_annualOpportunities = $("#annual-opportunities");
-    const input_baseWinRate = $("#base-win-rate");
-    const input_estAnnualGrowth = $("#est-annual-growth");
+    // Variables
+    const key_internalValue = "internal-value";
 
-    const input_q1 = $("#q1");
-    const input_q2 = $("#q2");
-    const input_q3 = $("#q3");
-    const input_q4 = $("#q4");
+    // Grabs the internal value and set as the input val
+    $("input").on("focus", function () {
+        $(this).val($(this).attr(key_internalValue));
+    });
 
-    // Set initial values
-    input_transactabilityAssumption.val(20);
-    input_transactabilityQuarters.val(4);
-    input_transactabilitySchedule.val("linear");
-
-    input_aspAssumption.val(10);
-
-    input_winRateAssumption.val(12);
-
-    input_reciprocityAssumption.val(25);
-
-    input_reciprocityQuartersBefore.val(2);
-    input_reciprocityQuarters.val(4);
-    input_reciprocitySchedule.val("linear");
-
-    input_annualRevenue.val(1000000);
-    input_averageSellingPrice.val(60000);
-    input_baseWinRate.val(20);
-    input_estAnnualGrowth.val(25);
-
-    input_q1.val(21);
-    input_q2.val(23);
-    input_q3.val(25);
-
-    // First calculations
-    // calculateBaselineAnnualPlan();
-    // calculateQuarterization();
-
-    // Add a callback for all inputs
-    $("input").on("change", function () {
-        console.log("change");
-        let _inputType = $(this).attr("input-type");
-        let _inputValue;
-
-        switch (_inputType) {
-            case "percentage":
-                $(this).attr("int-value", $(this).val());
-                _inputValue = $(this).val();
-                $(this).val(_inputValue + "%");
-                break;
-        
-            default:
+    // Controls the allowed keys for each kind of input
+    $("input").on("keydown", function (event) {
+        // Check if the pressed key is Enter (key code 13)
+        if (event.keyCode === 13) {
+            // Blur the input field when Enter is pressed
+            $(this).blur();
+            return;
+        }
+        switch ($(this).attr("display-type")) {
+            case "percentage" || "currency":
+                // Allow: backspace, delete, tab, escape, and enter
+                if ($.inArray(event.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (event.keyCode == 65 && (event.ctrlKey === true || event.metaKey === true)) ||
+                    // Allow: Ctrl+C
+                    (event.keyCode == 67 && (event.ctrlKey === true || event.metaKey === true)) ||
+                    // Allow: Ctrl+X
+                    (event.keyCode == 88 && (event.ctrlKey === true || event.metaKey === true)) ||
+                    // Allow: home, end, left, right
+                    (event.keyCode >= 35 && event.keyCode <= 39)) {
+                    // Let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) &&
+                    (event.keyCode < 96 || event.keyCode > 105)) {
+                    event.preventDefault();
+                }
                 break;
         }
     });
 
-    // Add a callback for all selects
-    $("select").on("change", function () {
-        console.log("select changed");
+    // Check if the content that is being pasted is supported by the input
+    $("input").on("paste", function (event) {
+        switch ($(this).attr("display-type")) {
+            case "percentage" || "currency":
+                // Get the pasted text
+                let _pastedText = event.originalEvent.clipboardData.getData('text');
+                // Remove non-numeric characters
+                var _cleanedText = _pastedText.replace(/[^0-9]/g, '');
+                // Update the input value with the cleaned text
+                $(this).val(_cleanedText);
+                // Prevent the default paste behavior
+                event.preventDefault();
+                break;
+        }
     });
 
-    function calculateBaselineAnnualPlan() {
-        if (input_annualRevenue.val() == "") { input_annualRevenue.val(0); }
-        if (input_averageSellingPrice.val() == "") { input_averageSellingPrice.val(0); }
-        if (input_baseWinRate.val() == "") { input_baseWinRate.val(0); }
-        if (input_estAnnualGrowth.val() == "") { input_estAnnualGrowth.val(0); }
+    // On blur gets the internal value and format it to display as the input value
+    $("input").on("blur", function () {
+        // First check if the input has a value val and if not reset to default
+        if ($(this).val() == "") { $(this).val($(this).attr("default-value")); }
+        // Save the val
+        $(this).attr(key_internalValue, $(this).val());
+        // Format and update the input val
+        switch ($(this).attr("display-type")) {
+            case "percentage":
+                $(this).val(formatPercentage($(this).val()));
+                break;
+            case "currency":
+                $(this).val(formatCurrency($(this).val()));
+                break;
+        }
+        // Run calculations
+        calculateCloudSalesAssumptions();
+    });
 
-        value_annualRevenue = input_annualRevenue.val();
-        value_averageSellingPrice = input_averageSellingPrice.val();
-        value_baseWinRate = input_baseWinRate.val() / 100;
-        value_estAnnualGrowth = input_estAnnualGrowth.val() / 100;
-
-        value_annualPipelineTarget = value_annualRevenue / value_baseWinRate;
-        value_annualOpportunities = (value_annualPipelineTarget / value_averageSellingPrice);
-
-        input_annualPipelineTarget.val(value_annualPipelineTarget);
-        input_annualOpportunities.val(value_annualOpportunities.toFixed(0));
+    function formatCurrency(num) {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0,
+        }).format(num);
     }
+
+    function formatPercentage(num) {
+        return num + "%";
+    }
+
+    function formatNumber(num, round) {
+        let _num = num;
+        if (round) {
+            _num = Math.round(num);
+        }
+    }
+
+    function calculateCloudSalesAssumptions() {
+        let _annualRevenue = input_baselineAnnualRevenue.attr(key_internalValue);
+        let _averageSellingPrice = input_baselineAverageSellingPrice.attr(key_internalValue);
+        let _baseWinRate = input_baselineBaseWinRate.attr(key_internalValue) / 100;
+        let _baselineQ1 = input_baselineQ1.attr(key_internalValue);
+        let _baselineQ2 = input_baselineQ2.attr(key_internalValue);
+        let _baselineQ3 = input_baselineQ3.attr(key_internalValue);
+        // Calculate
+        let _resultAnnualPipelineTarget = _annualRevenue / _baseWinRate;
+        let _resultAnnualOpportunities = _resultAnnualPipelineTarget / _averageSellingPrice;
+        let _resultBaselineQ4 = 100 - _baselineQ3 - _baselineQ2 - _baselineQ1;
+        // Save raw values
+        result_baselineAnnualPipelineTarget.attr(key_internalValue, _resultAnnualPipelineTarget);
+        result_baselineAnnualOpportunities.attr(key_internalValue, _resultAnnualOpportunities);
+        result_baselineQ4.attr(key_internalValue, _resultBaselineQ4);
+        // Show results
+        result_baselineAnnualPipelineTarget.text(formatCurrency(_resultAnnualPipelineTarget));
+        result_baselineAnnualOpportunities.text(Math.round(_resultAnnualOpportunities));
+        result_baselineQ4.text(formatPercentage(_resultBaselineQ4));
+    }
+
+    function initConfig() {
+        // Transactability
+        input_transactabilityAssumption.val(20);
+        input_transactabilityQuartersRamp.val(4);
+        input_transactabilityRamping.val("linear");
+        // ASP % + Assumption / Target
+        input_aspAssumption.val(10);
+        // Win Rate % + Assumption
+        input_winRateAssumption.val(12);
+        // Reciprocity
+        input_reciprocityAssumption.val(25);
+        input_reciprocityQuartersBefore.val(2);
+        input_reciprocityQuartersRamp.val(4);
+        input_reciprocityRamping.val("linear");
+        // Baselines
+        input_baselineAnnualRevenue.val(1000000);
+        input_baselineAverageSellingPrice.val(60000);
+        input_baselineBaseWinRate.val(20);
+        input_baselineEstAnnualGrowth.val(25);
+        input_baselineQ1.val(21);
+        input_baselineQ2.val(23);
+        input_baselineQ3.val(25);
+        // Force a blur on all inputs
+        $("input").trigger("blur");
+        // Run calculations
+        calculateCloudSalesAssumptions();
+    }
+
+    // Do a first run
+    initConfig();
+
+    // // Add a callback for all selects
+    // $("select").on("change", function () {
+    //     console.log("select changed");
+    // });
 
     function calculateQuarterization() {
 
-        if (input_q1.val() == "") { input_q1.val(0); }
-        if (input_q2.val() == "") { input_q2.val(0); }
-        if (input_q3.val() == "") { input_q3.val(0); }
+        // if (input_baselineQ1.val() == "") { input_baselineQ1.val(0); }
+        // if (input_baselineQ2.val() == "") { input_baselineQ2.val(0); }
+        // if (input_baselineQ3.val() == "") { input_baselineQ3.val(0); }
 
-        value_q1 = input_q1.val();
-        value_q2 = input_q2.val();
-        value_q3 = input_q3.val();
-        value_q4 = 100 - value_q3 - value_q2 - value_q1;
+        // value_q1 = input_baselineQ1.val();
+        // value_q2 = input_baselineQ2.val();
+        // value_q3 = input_baselineQ3.val();
+        // value_q4 = 100 - value_q3 - value_q2 - value_q1;
 
-        input_q4.val(value_q4);
+        // input_baselineQ4.val(value_q4);
     }
 </script>
