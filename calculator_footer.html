@@ -1,0 +1,109 @@
+<script>
+    const input_transactabilityAssumption = $("#transactability-assumption");
+    const input_transactabilityQuarters = $("#transactability-quarters");
+    const input_transactabilitySchedule = $("#transactability-schedule");
+
+    const input_aspAssumption = $("#asp-assumption");
+
+    const input_winRateAssumption = $("#win-rate-assumption");
+
+    const input_reciprocityAssumption = $("#co-sell-assumption");
+    const input_reciprocityQuartersBefore = $("#co-sell-quarters-before");
+    const input_reciprocityQuarters = $("#co-sell-quarters");
+    const input_reciprocitySchedule = $("#co-sell-schedule");
+
+    const input_annualRevenue = $("#annual-revenue");
+    const input_averageSellingPrice = $("#average-selling-price");
+    const input_annualPipelineTarget = $("#annual-pipeline-target");
+    const input_annualOpportunities = $("#annual-opportunities");
+    const input_baseWinRate = $("#base-win-rate");
+    const input_estAnnualGrowth = $("#est-annual-growth");
+
+    const input_q1 = $("#q1");
+    const input_q2 = $("#q2");
+    const input_q3 = $("#q3");
+    const input_q4 = $("#q4");
+
+    // Set initial values
+    input_transactabilityAssumption.val(20);
+    input_transactabilityQuarters.val(4);
+    input_transactabilitySchedule.val("linear");
+
+    input_aspAssumption.val(10);
+
+    input_winRateAssumption.val(12);
+
+    input_reciprocityAssumption.val(25);
+
+    input_reciprocityQuartersBefore.val(2);
+    input_reciprocityQuarters.val(4);
+    input_reciprocitySchedule.val("linear");
+
+    input_annualRevenue.val(1000000);
+    input_averageSellingPrice.val(60000);
+    input_baseWinRate.val(20);
+    input_estAnnualGrowth.val(25);
+
+    input_q1.val(21);
+    input_q2.val(23);
+    input_q3.val(25);
+
+    // First calculations
+    // calculateBaselineAnnualPlan();
+    // calculateQuarterization();
+
+    // Add a callback for all inputs
+    $("input").on("change", function () {
+        console.log("change");
+        let _inputType = $(this).attr("input-type");
+        let _inputValue;
+
+        switch (_inputType) {
+            case "percentage":
+                $(this).attr("int-value", $(this).val());
+                _inputValue = $(this).val();
+                $(this).val(_inputValue + "%");
+                break;
+        
+            default:
+                break;
+        }
+    });
+
+    // Add a callback for all selects
+    $("select").on("change", function () {
+        console.log("select changed");
+    });
+
+    function calculateBaselineAnnualPlan() {
+        if (input_annualRevenue.val() == "") { input_annualRevenue.val(0); }
+        if (input_averageSellingPrice.val() == "") { input_averageSellingPrice.val(0); }
+        if (input_baseWinRate.val() == "") { input_baseWinRate.val(0); }
+        if (input_estAnnualGrowth.val() == "") { input_estAnnualGrowth.val(0); }
+
+        value_annualRevenue = input_annualRevenue.val();
+        value_averageSellingPrice = input_averageSellingPrice.val();
+        value_baseWinRate = input_baseWinRate.val() / 100;
+        value_estAnnualGrowth = input_estAnnualGrowth.val() / 100;
+
+        value_annualPipelineTarget = value_annualRevenue / value_baseWinRate;
+        value_annualOpportunities = (value_annualPipelineTarget / value_averageSellingPrice);
+
+        input_annualPipelineTarget.val(value_annualPipelineTarget);
+        input_annualOpportunities.val(value_annualOpportunities.toFixed(0));
+    }
+
+    function calculateQuarterization() {
+
+        if (input_q1.val() == "") { input_q1.val(0); }
+        if (input_q2.val() == "") { input_q2.val(0); }
+        if (input_q3.val() == "") { input_q3.val(0); }
+
+        value_q1 = input_q1.val();
+        value_q2 = input_q2.val();
+        value_q3 = input_q3.val();
+        value_q4 = 100 - value_q3 - value_q2 - value_q1;
+
+        input_q4.val(value_q4);
+    }
+</script>
