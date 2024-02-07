@@ -1,18 +1,18 @@
 <script>
-    // Inputs - Transactability
+    /* Inputs - Transactability */
     const input_transactabilityAssumption = $("#transactability-assumption");
-    const input_transactabilityQuartersRamp = $("#transactability-quarters-ramp");
-    const input_transactabilityRamping = $("#transactability-ramping");
-    // Input - ASP % + Assumption / Target
+    const input_transactabilityQuarters = $("#transactability-quarters");
+    const input_transactabilityRamp = $("#transactability-ramp");
+    /* Input - ASP % + Assumption / Target */
     const input_aspAssumption = $("#asp-assumption");
-    // Inputs - Win Rate % + Assumption
+    /* Inputs - Win Rate % + Assumption */
     const input_winRateAssumption = $("#win-rate-assumption");
-    // Inputs - Reciprocity
+    /* Inputs - Reciprocity */
     const input_reciprocityAssumption = $("#reciprocity-assumption");
     const input_reciprocityQuartersBefore = $("#reciprocity-quarters-before");
-    const input_reciprocityQuartersRamp = $("#reciprocity-quarters-ramp");
-    const input_reciprocityRamping = $("#reciprocity-ramping");
-    // Inputs - Baselines
+    const input_reciprocityQuarters = $("#reciprocity-quarters");
+    const input_reciprocityRamp = $("#reciprocity-ramp");
+    /* Inputs - Baselines */
     const input_baselineAnnualRevenue = $("#baseline-annual-revenue");
     const input_baselineAverageSellingPrice = $("#baseline-average-selling-price");
     const input_baselineBaseWinRate = $("#baseline-base-win-rate");
@@ -20,12 +20,11 @@
     const input_baselineQ1 = $("#baseline-q1");
     const input_baselineQ2 = $("#baseline-q2");
     const input_baselineQ3 = $("#baseline-q3");
-
-    // Results - Baselines
+    /* Results - Baselines */
     const result_baselineAnnualPipelineTarget = $("#baseline-annual-pipeline-target");
     const result_baselineAnnualOpportunities = $("#baseline-annual-opportunities");
     const result_baselineQ4 = $("#baseline-q4");
-    // Results - Table - Baseline Pipeline
+    /* Results - Table - Baseline Pipeline */
     const result_baselinePipelineFy1_Q1 = $("#baseline-pipeline-fy1-q1");
     const result_baselinePipelineFy1_Q2 = $("#baseline-pipeline-fy1-q2");
     const result_baselinePipelineFy1_Q3 = $("#baseline-pipeline-fy1-q3");
@@ -34,7 +33,7 @@
     const result_baselinePipelineFy2_Q2 = $("#baseline-pipeline-fy2-q2");
     const result_baselinePipelineFy2_Q3 = $("#baseline-pipeline-fy2-q3");
     const result_baselinePipelineFy2_Q4 = $("#baseline-pipeline-fy2-q4");
-    // Results - Table - Baseline Opportunity
+    /* Results - Table - Baseline Opportunity */
     const result_baselineOpportunityFy1_Q1 = $("#baseline-opportunity-fy1-q1");
     const result_baselineOpportunityFy1_Q2 = $("#baseline-opportunity-fy1-q2");
     const result_baselineOpportunityFy1_Q3 = $("#baseline-opportunity-fy1-q3");
@@ -43,7 +42,7 @@
     const result_baselineOpportunityFy2_Q2 = $("#baseline-opportunity-fy2-q2");
     const result_baselineOpportunityFy2_Q3 = $("#baseline-opportunity-fy2-q3");
     const result_baselineOpportunityFy2_Q4 = $("#baseline-opportunity-fy2-q4");
-    // Results - Table - Baseline Revenue
+    /* Results - Table - Baseline Revenue */
     const result_baselineRevenueFy1_Q1 = $("#baseline-revenue-fy1-q1");
     const result_baselineRevenueFy1_Q2 = $("#baseline-revenue-fy1-q2");
     const result_baselineRevenueFy1_Q3 = $("#baseline-revenue-fy1-q3");
@@ -52,40 +51,60 @@
     const result_baselineRevenueFy2_Q2 = $("#baseline-revenue-fy2-q2");
     const result_baselineRevenueFy2_Q3 = $("#baseline-revenue-fy2-q3");
     const result_baselineRevenueFy2_Q4 = $("#baseline-revenue-fy2-q4");
+    /* Results - Table - Marketplace Ramp */
+    const result_marketplaceRampFy1_Q1 = $("#marketplace-ramp-fy1-q1");
+    const result_marketplaceRampFy1_Q2 = $("#marketplace-ramp-fy1-q2");
+    const result_marketplaceRampFy1_Q3 = $("#marketplace-ramp-fy1-q3");
+    const result_marketplaceRampFy1_Q4 = $("#marketplace-ramp-fy1-q4");
+    const result_marketplaceRampFy2_Q1 = $("#marketplace-ramp-fy2-q1");
+    const result_marketplaceRampFy2_Q2 = $("#marketplace-ramp-fy2-q2");
+    const result_marketplaceRampFy2_Q3 = $("#marketplace-ramp-fy2-q3");
+    const result_marketplaceRampFy2_Q4 = $("#marketplace-ramp-fy2-q4");
+    /* Ramp Variables */
+    const transactibilityScalar = 100;
+    const transactibilityDelay = 0;
+    const reciprocityScalar = 100;
+    const reciprocityDelay = 2;
 
-    // Variables
+    /* We are not going to create results variables for all ramp types
+    we will use 9 variables that will be updated based on the ramp that is selected. */
+    /* Results - Ramps */
+    let result_transactibilityRamp = new Array(9);
+    let result_reciprocityRamp = new Array(9);
+
+    /* General Variables */
     const key_intValue = "internal-value";
     let isInitialized = false;
 
-    // Grabs the internal value and set as the input val
+    /* Grabs the internal value and set as the input val */
     $("input").on("focus", function () {
         $(this).val($(this).attr(key_intValue));
     });
 
-    // Controls the allowed keys for each kind of input
+    /* Controls the allowed keys for each kind of input */
     $("input").on("keydown", function (event) {
-        // Check if the pressed key is Enter (key code 13)
+        /* Check if the pressed key is Enter (key code 13) */
         if (event.keyCode === 13) {
-            // Blur the input field when Enter is pressed
+            /* Blur the input field when Enter is pressed */
             $(this).blur();
             return;
         }
         switch ($(this).attr("display-type")) {
             case "percentage" || "currency":
-                // Allow: backspace, delete, tab, escape, and enter
+                /* Allow: backspace, delete, tab, escape, and enter */
                 if ($.inArray(event.keyCode, [46, 8, 9, 27, 13]) !== -1 ||
-                    // Allow: Ctrl+A
+                    /* Allow: Ctrl+A */
                     (event.keyCode == 65 && (event.ctrlKey === true || event.metaKey === true)) ||
-                    // Allow: Ctrl+C
+                    /* Allow: Ctrl+C */
                     (event.keyCode == 67 && (event.ctrlKey === true || event.metaKey === true)) ||
-                    // Allow: Ctrl+X
+                    /* Allow: Ctrl+X */
                     (event.keyCode == 88 && (event.ctrlKey === true || event.metaKey === true)) ||
-                    // Allow: home, end, left, right
+                    /* Allow: home, end, left, right */
                     (event.keyCode >= 35 && event.keyCode <= 39)) {
-                    // Let it happen, don't do anything
+                    /* Let it happen, don't do anything */
                     return;
                 }
-                // Ensure that it is a number and stop the keypress
+                /* Ensure that it is a number and stop the keypress */
                 if ((event.shiftKey || (event.keyCode < 48 || event.keyCode > 57)) &&
                     (event.keyCode < 96 || event.keyCode > 105)) {
                     event.preventDefault();
@@ -94,29 +113,29 @@
         }
     });
 
-    // Check if the content that is being pasted is supported by the input
+    /* Check if the content that is being pasted is supported by the input */
     $("input").on("paste", function (event) {
         switch ($(this).attr("display-type")) {
             case "percentage" || "currency":
-                // Get the pasted text
+                /* Get the pasted text */
                 let _pastedText = event.originalEvent.clipboardData.getData('text');
-                // Remove non-numeric characters
+                /* Remove non-numeric characters */
                 var _cleanedText = _pastedText.replace(/[^0-9]/g, '');
-                // Update the input value with the cleaned text
+                /* Update the input value with the cleaned text */
                 $(this).val(_cleanedText);
-                // Prevent the default paste behavior
+                /* Prevent the default paste behavior */
                 event.preventDefault();
                 break;
         }
     });
 
-    // On blur gets the internal value and format it to display as the input value
+    /* On blur gets the internal value and format it to display as the input value */
     $("input").on("blur", function () {
-        // First check if the input has a value val and if not reset to default
+        /* First check if the input has a value val and if not reset to default */
         if ($(this).val() == "") { $(this).val($(this).attr("default-value")); }
-        // Save the val
+        /* Save the val */
         $(this).attr(key_intValue, $(this).val());
-        // Format and update the input val
+        /* Format and update the input val */
         switch ($(this).attr("display-type")) {
             case "percentage":
                 $(this).val(formatPercentage($(this).val()));
@@ -125,7 +144,7 @@
                 $(this).val(formatCurrency($(this).val()));
                 break;
         }
-        if(isInitialized) {
+        if (isInitialized) {
             runCalculations();
         }
     });
@@ -150,15 +169,15 @@
     }
 
     function calculateCloudSalesAssumptions() {
-        // Calculate
+        /* Calculate */
         let _annualPipelineTarget = input_baselineAnnualRevenue.attr(key_intValue) / (input_baselineBaseWinRate.attr(key_intValue) / 100);
         let _annualOpportunities = _annualPipelineTarget / input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineQ4 = 100 - input_baselineQ3.attr(key_intValue) - input_baselineQ2.attr(key_intValue) - input_baselineQ1.attr(key_intValue);
-        // Save raw values
+        /* Save raw values */
         result_baselineAnnualPipelineTarget.attr(key_intValue, _annualPipelineTarget);
         result_baselineAnnualOpportunities.attr(key_intValue, _annualOpportunities);
         result_baselineQ4.attr(key_intValue, _baselineQ4);
-        // Show results
+        /* Show results */
         result_baselineAnnualPipelineTarget.text(formatCurrency(_annualPipelineTarget));
         result_baselineAnnualOpportunities.text(Math.round(_annualOpportunities));
         result_baselineQ4.text(formatPercentage(_baselineQ4));
@@ -173,7 +192,7 @@
         let _baselinePipelineFy2_Q2 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ2.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
         let _baselinePipelineFy2_Q3 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ3.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
         let _baselinePipelineFy2_Q4 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (result_baselineQ4.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
-        // Save raw values
+        /* Save raw values */
         result_baselinePipelineFy1_Q1.attr(key_intValue, _baselinePipelineFy1_Q1);
         result_baselinePipelineFy1_Q2.attr(key_intValue, _baselinePipelineFy1_Q2);
         result_baselinePipelineFy1_Q3.attr(key_intValue, _baselinePipelineFy1_Q3);
@@ -182,7 +201,7 @@
         result_baselinePipelineFy2_Q2.attr(key_intValue, _baselinePipelineFy2_Q2);
         result_baselinePipelineFy2_Q3.attr(key_intValue, _baselinePipelineFy2_Q3);
         result_baselinePipelineFy2_Q4.attr(key_intValue, _baselinePipelineFy2_Q4);
-        // Show results
+        /* Show results */
         result_baselinePipelineFy1_Q1.text(formatCurrency(_baselinePipelineFy1_Q1));
         result_baselinePipelineFy1_Q2.text(formatCurrency(_baselinePipelineFy1_Q2));
         result_baselinePipelineFy1_Q3.text(formatCurrency(_baselinePipelineFy1_Q3));
@@ -202,7 +221,7 @@
         let _baselineOpportunityFy2_Q2 = result_baselinePipelineFy2_Q2.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineOpportunityFy2_Q3 = result_baselinePipelineFy2_Q3.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineOpportunityFy2_Q4 = result_baselinePipelineFy2_Q4.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        // Save raw values
+        /* Save raw values */
         result_baselineOpportunityFy1_Q1.attr(key_intValue, _baselineOpportunityFy1_Q1);
         result_baselineOpportunityFy1_Q2.attr(key_intValue, _baselineOpportunityFy1_Q2);
         result_baselineOpportunityFy1_Q3.attr(key_intValue, _baselineOpportunityFy1_Q3);
@@ -211,7 +230,7 @@
         result_baselineOpportunityFy2_Q2.attr(key_intValue, _baselineOpportunityFy2_Q2);
         result_baselineOpportunityFy2_Q3.attr(key_intValue, _baselineOpportunityFy2_Q3);
         result_baselineOpportunityFy2_Q4.attr(key_intValue, _baselineOpportunityFy2_Q4);
-        // Show results
+        /* Show results */
         result_baselineOpportunityFy1_Q1.text(Math.round(_baselineOpportunityFy1_Q1));
         result_baselineOpportunityFy1_Q2.text(Math.round(_baselineOpportunityFy1_Q2));
         result_baselineOpportunityFy1_Q3.text(Math.round(_baselineOpportunityFy1_Q3));
@@ -231,7 +250,7 @@
         let _baselineRevenueFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineRevenueFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineRevenueFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
-        // Save raw values
+        /* Save raw values */
         result_baselineRevenueFy1_Q1.attr(key_intValue, _baselineRevenueFy1_Q1);
         result_baselineRevenueFy1_Q2.attr(key_intValue, _baselineRevenueFy1_Q2);
         result_baselineRevenueFy1_Q3.attr(key_intValue, _baselineRevenueFy1_Q3);
@@ -240,7 +259,7 @@
         result_baselineRevenueFy2_Q2.attr(key_intValue, _baselineRevenueFy2_Q2);
         result_baselineRevenueFy2_Q3.attr(key_intValue, _baselineRevenueFy2_Q3);
         result_baselineRevenueFy2_Q4.attr(key_intValue, _baselineRevenueFy2_Q4);
-        // Show results
+        /* Show results */
         result_baselineRevenueFy1_Q1.text(formatCurrency(_baselineRevenueFy1_Q1));
         result_baselineRevenueFy1_Q2.text(formatCurrency(_baselineRevenueFy1_Q2));
         result_baselineRevenueFy1_Q3.text(formatCurrency(_baselineRevenueFy1_Q3));
@@ -251,29 +270,92 @@
         result_baselineRevenueFy2_Q4.text(formatCurrency(_baselineRevenueFy2_Q4));
     }
 
+    function calculateTransactibilityRamp() {
+        let _linearRamp, _minValue;
+        for (let i = 0; i < result_transactibilityRamp.length; i++) {
+            switch (input_transactabilityRamp.val()) {
+                case "linear":
+                    _linearRamp = linearRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i);
+                    _minValue = Math.min(_linearRamp, transactibilityScalar);
+                    result_transactibilityRamp[i] = Math.max(_minValue, 0);
+                    break;
+            }
+        }
+    }
+
+    function calculateReciprocityRamp() {
+        let _linearRamp, _minValue;
+        for (let i = 0; i < result_reciprocityRamp.length; i++) {
+            switch (input_reciprocityRamp.val()) {
+                case "linear":
+                    _linearRamp = linearRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
+                    _minValue = Math.min(_linearRamp, reciprocityScalar);
+                    result_reciprocityRamp[i] = Math.max(_minValue, 0);
+                    break;
+            }
+        }
+    }
+
+    function linearRamp(delay, duration, limit, period) {
+        let _result = limit / duration * period + (0 - ((limit / duration) * delay));
+        return _result;
+    }
+
+    function calculateMarketplaceRamp() {
+        let _marketplaceRampFy1_Q1 = (result_transactibilityRamp[0] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy1_Q2 = (result_transactibilityRamp[1] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy1_Q3 = (result_transactibilityRamp[2] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy1_Q4 = (result_transactibilityRamp[3] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy2_Q1 = (result_transactibilityRamp[4] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy2_Q2 = (result_transactibilityRamp[5] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy2_Q3 = (result_transactibilityRamp[6] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        let _marketplaceRampFy2_Q4 = (result_transactibilityRamp[7] * input_transactabilityAssumption.attr(key_intValue)) / 100;
+        /* Save raw values */
+        result_marketplaceRampFy1_Q1.attr(key_intValue, _marketplaceRampFy1_Q1);
+        result_marketplaceRampFy1_Q2.attr(key_intValue, _marketplaceRampFy1_Q2);
+        result_marketplaceRampFy1_Q3.attr(key_intValue, _marketplaceRampFy1_Q3);
+        result_marketplaceRampFy1_Q4.attr(key_intValue, _marketplaceRampFy1_Q4);
+        result_marketplaceRampFy2_Q1.attr(key_intValue, _marketplaceRampFy2_Q1);
+        result_marketplaceRampFy2_Q2.attr(key_intValue, _marketplaceRampFy2_Q2);
+        result_marketplaceRampFy2_Q3.attr(key_intValue, _marketplaceRampFy2_Q3);
+        result_marketplaceRampFy2_Q4.attr(key_intValue, _marketplaceRampFy2_Q4);
+        /* Show results */
+        result_marketplaceRampFy1_Q1.text(formatPercentage(_marketplaceRampFy1_Q1));
+        result_marketplaceRampFy1_Q2.text(formatPercentage(_marketplaceRampFy1_Q2));
+        result_marketplaceRampFy1_Q3.text(formatPercentage(_marketplaceRampFy1_Q3));
+        result_marketplaceRampFy1_Q4.text(formatPercentage(_marketplaceRampFy1_Q4));
+        result_marketplaceRampFy2_Q1.text(formatPercentage(_marketplaceRampFy2_Q1));
+        result_marketplaceRampFy2_Q2.text(formatPercentage(_marketplaceRampFy2_Q2));
+        result_marketplaceRampFy2_Q3.text(formatPercentage(_marketplaceRampFy2_Q3));
+        result_marketplaceRampFy2_Q4.text(formatPercentage(_marketplaceRampFy2_Q4));
+    }
+
     function runCalculations() {
-        // Run calculations
+        /* Run calculations */
         calculateCloudSalesAssumptions();
         calculateTableBaselinePipeline();
         calculateTableBaselineOpportunities();
         calculateBaselineRevenue();
+        calculateTransactibilityRamp();
+        calculateReciprocityRamp();
+        calculateMarketplaceRamp();
     }
 
     function initConfig() {
-        // Transactability
+        /* Transactability */
         input_transactabilityAssumption.val(20);
-        input_transactabilityQuartersRamp.val(4);
-        input_transactabilityRamping.val("linear");
-        // ASP % + Assumption / Target
+        input_transactabilityQuarters.val(4);
+        input_transactabilityRamp.val("linear");
+        /* ASP % + Assumption / Target */
         input_aspAssumption.val(10);
-        // Win Rate % + Assumption
+        /* Win Rate % + Assumption */
         input_winRateAssumption.val(12);
-        // Reciprocity
+        /* Reciprocity */
         input_reciprocityAssumption.val(25);
         input_reciprocityQuartersBefore.val(2);
-        input_reciprocityQuartersRamp.val(4);
-        input_reciprocityRamping.val("linear");
-        // Baselines
+        input_reciprocityQuarters.val(4);
+        input_reciprocityRamp.val("linear");
+        /* Baselines */
         input_baselineAnnualRevenue.val(1000000);
         input_baselineAverageSellingPrice.val(60000);
         input_baselineBaseWinRate.val(20);
@@ -281,12 +363,12 @@
         input_baselineQ1.val(21);
         input_baselineQ2.val(23);
         input_baselineQ3.val(25);
-        // Force a blur on all inputs
+        /* Force a blur on all inputs */
         $("input").trigger("blur");
         runCalculations();
         isInitialized = true;
     }
 
-    // Do a first run
+    /* Do a first run */
     initConfig();
 </script>
