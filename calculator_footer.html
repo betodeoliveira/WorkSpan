@@ -25,13 +25,22 @@
     const result_baselineAnnualPipelineTarget = $("#baseline-annual-pipeline-target");
     const result_baselineAnnualOpportunities = $("#baseline-annual-opportunities");
     const result_baselineQ4 = $("#baseline-q4");
+    // Results - Table
+    const result_baselinePipelineFy1Q1 = $("#baseline-pipeline-target-fy1-q1");
+    const result_baselinePipelineFy1Q2 = $("#baseline-pipeline-target-fy1-q2");
+    const result_baselinePipelineFy1Q3 = $("#baseline-pipeline-target-fy1-q3");
+    const result_baselinePipelineFy1Q4 = $("#baseline-pipeline-target-fy1-q4");
+    const result_baselinePipelineFy2Q1 = $("#baseline-pipeline-target-fy2-q1");
+    const result_baselinePipelineFy2Q2 = $("#baseline-pipeline-target-fy2-q2");
+    const result_baselinePipelineFy2Q3 = $("#baseline-pipeline-target-fy2-q3");
+    const result_baselinePipelineFy2Q4 = $("#baseline-pipeline-target-fy2-q4");
 
     // Variables
-    const key_internalValue = "internal-value";
+    const key_intValue = "internal-value";
 
     // Grabs the internal value and set as the input val
     $("input").on("focus", function () {
-        $(this).val($(this).attr(key_internalValue));
+        $(this).val($(this).attr(key_intValue));
     });
 
     // Controls the allowed keys for each kind of input
@@ -87,7 +96,7 @@
         // First check if the input has a value val and if not reset to default
         if ($(this).val() == "") { $(this).val($(this).attr("default-value")); }
         // Save the val
-        $(this).attr(key_internalValue, $(this).val());
+        $(this).attr(key_intValue, $(this).val());
         // Format and update the input val
         switch ($(this).attr("display-type")) {
             case "percentage":
@@ -99,6 +108,7 @@
         }
         // Run calculations
         calculateCloudSalesAssumptions();
+        calculateTableBaselinePipeline();
     });
 
     function formatCurrency(num) {
@@ -121,24 +131,26 @@
     }
 
     function calculateCloudSalesAssumptions() {
-        let _annualRevenue = input_baselineAnnualRevenue.attr(key_internalValue);
-        let _averageSellingPrice = input_baselineAverageSellingPrice.attr(key_internalValue);
-        let _baseWinRate = input_baselineBaseWinRate.attr(key_internalValue) / 100;
-        let _baselineQ1 = input_baselineQ1.attr(key_internalValue);
-        let _baselineQ2 = input_baselineQ2.attr(key_internalValue);
-        let _baselineQ3 = input_baselineQ3.attr(key_internalValue);
         // Calculate
-        let _resultAnnualPipelineTarget = _annualRevenue / _baseWinRate;
-        let _resultAnnualOpportunities = _resultAnnualPipelineTarget / _averageSellingPrice;
-        let _resultBaselineQ4 = 100 - _baselineQ3 - _baselineQ2 - _baselineQ1;
+        let _resultAnnualPipelineTarget = input_baselineAnnualRevenue.attr(key_intValue) / (input_baselineBaseWinRate.attr(key_intValue) / 100);
+        let _resultAnnualOpportunities = _resultAnnualPipelineTarget / input_baselineAverageSellingPrice.attr(key_intValue);
+        let _resultBaselineQ4 = 100 - input_baselineQ3.attr(key_intValue) - input_baselineQ2.attr(key_intValue) - input_baselineQ1.attr(key_intValue);
         // Save raw values
-        result_baselineAnnualPipelineTarget.attr(key_internalValue, _resultAnnualPipelineTarget);
-        result_baselineAnnualOpportunities.attr(key_internalValue, _resultAnnualOpportunities);
-        result_baselineQ4.attr(key_internalValue, _resultBaselineQ4);
+        result_baselineAnnualPipelineTarget.attr(key_intValue, _resultAnnualPipelineTarget);
+        result_baselineAnnualOpportunities.attr(key_intValue, _resultAnnualOpportunities);
+        result_baselineQ4.attr(key_intValue, _resultBaselineQ4);
         // Show results
         result_baselineAnnualPipelineTarget.text(formatCurrency(_resultAnnualPipelineTarget));
         result_baselineAnnualOpportunities.text(Math.round(_resultAnnualOpportunities));
         result_baselineQ4.text(formatPercentage(_resultBaselineQ4));
+    }
+
+    function calculateTableBaselinePipeline() {
+        let _resultBaselinePipelineFy1Q1 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ1.attr(key_intValue) / 100);
+        // Save raw values
+        result_baselinePipelineFy1Q1.attr(key_intValue, _resultBaselinePipelineFy1Q1);
+        // Show results
+        result_baselinePipelineFy1Q1.text(formatCurrency(_resultBaselinePipelineFy1Q1));
     }
 
     function initConfig() {
@@ -165,8 +177,6 @@
         input_baselineQ3.val(25);
         // Force a blur on all inputs
         $("input").trigger("blur");
-        // Run calculations
-        calculateCloudSalesAssumptions();
     }
 
     // Do a first run
