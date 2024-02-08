@@ -96,6 +96,15 @@
     const result_revenueImpactFy2_Q2 = $("#revenue-impact-fy2-q2");
     const result_revenueImpactFy2_Q3 = $("#revenue-impact-fy2-q3");
     const result_revenueImpactFy2_Q4 = $("#revenue-impact-fy2-q4");
+    /* Results - Table - Revenue Impact */
+    const result_projectedRevenueFy1_Q1 = $("#projected-revenue-fy1-q1");
+    const result_projectedRevenueFy1_Q2 = $("#projected-revenue-fy1-q2");
+    const result_projectedRevenueFy1_Q3 = $("#projected-revenue-fy1-q3");
+    const result_projectedRevenueFy1_Q4 = $("#projected-revenue-fy1-q4");
+    const result_projectedRevenueFy2_Q1 = $("#projected-revenue-fy2-q1");
+    const result_projectedRevenueFy2_Q2 = $("#projected-revenue-fy2-q2");
+    const result_projectedRevenueFy2_Q3 = $("#projected-revenue-fy2-q3");
+    const result_projectedRevenueFy2_Q4 = $("#projected-revenue-fy2-q4");
     /* Ramp Variables */
     const transactibilityScalar = 100;
     const transactibilityDelay = 0;
@@ -532,6 +541,10 @@
         let _baseWinRate = parseFloat(input_baselineBaseWinRate.attr(key_intValue) / 100);
         let _result = referralTarget * _avgSellingPrice * (1 + _winRate) * (1 + _aspAssumption) * _baseWinRate - (referralTarget * _avgSellingPrice * _baseWinRate) + (referralProjection * _avgSellingPrice * _baseWinRate * (1 + _winRate) * (1 + _aspAssumption));
         return _result;
+    }
+
+    function calculateProjectedRevenue() {
+        
     }
 
     function runCalculations() {
