@@ -403,9 +403,9 @@
         result_referralTargetFy1_Q3.attr(key_intValue, _referralTargetFy1_Q3);
         result_referralTargetFy1_Q4.attr(key_intValue, _referralTargetFy1_Q4);
         result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q1);
-        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q2);
-        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q3);
-        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q4);
+        result_referralTargetFy2_Q2.attr(key_intValue, _referralTargetFy2_Q2);
+        result_referralTargetFy2_Q3.attr(key_intValue, _referralTargetFy2_Q3);
+        result_referralTargetFy2_Q4.attr(key_intValue, _referralTargetFy2_Q4);
         /* Show results */
         result_referralTargetFy1_Q1.text(Math.round(_referralTargetFy1_Q1));
         result_referralTargetFy1_Q2.text(Math.round(_referralTargetFy1_Q2));
@@ -424,16 +424,28 @@
         let _referralProjectionF1_Q2 = (result_reciprocityRamp[1] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy1_Q2.attr(key_intValue);
         let _referralProjectionF1_Q3 = (result_reciprocityRamp[2] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy1_Q3.attr(key_intValue);
         let _referralProjectionF1_Q4 = (result_reciprocityRamp[3] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy1_Q4.attr(key_intValue);
+        let _referralProjectionF2_Q1 = (result_reciprocityRamp[4] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q1.attr(key_intValue);
+        let _referralProjectionF2_Q2 = (result_reciprocityRamp[5] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q2.attr(key_intValue);
+        let _referralProjectionF2_Q3 = (result_reciprocityRamp[6] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q3.attr(key_intValue);
+        let _referralProjectionF2_Q4 = (result_reciprocityRamp[7] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q4.attr(key_intValue);
         /* Save raw values */
         result_referralProjectionFy1_Q1.attr(key_intValue, _referralProjectionF1_Q1);
         result_referralProjectionFy1_Q2.attr(key_intValue, _referralProjectionF1_Q2);
         result_referralProjectionFy1_Q3.attr(key_intValue, _referralProjectionF1_Q3);
         result_referralProjectionFy1_Q4.attr(key_intValue, _referralProjectionF1_Q4);
+        result_referralProjectionFy2_Q1.attr(key_intValue, _referralProjectionF2_Q1);
+        result_referralProjectionFy2_Q2.attr(key_intValue, _referralProjectionF2_Q2);
+        result_referralProjectionFy2_Q3.attr(key_intValue, _referralProjectionF2_Q3);
+        result_referralProjectionFy2_Q4.attr(key_intValue, _referralProjectionF2_Q4);
         /* Show results */
         result_referralProjectionFy1_Q1.text(Math.round(_referralProjectionF1_Q1));
         result_referralProjectionFy1_Q2.text(Math.round(_referralProjectionF1_Q2));
         result_referralProjectionFy1_Q3.text(Math.round(_referralProjectionF1_Q3));
         result_referralProjectionFy1_Q4.text(Math.round(_referralProjectionF1_Q4));
+        result_referralProjectionFy2_Q1.text(Math.round(_referralProjectionF2_Q1));
+        result_referralProjectionFy2_Q2.text(Math.round(_referralProjectionF2_Q2));
+        result_referralProjectionFy2_Q3.text(Math.round(_referralProjectionF2_Q3));
+        result_referralProjectionFy2_Q4.text(Math.round(_referralProjectionF2_Q4));
     }
 
     function calculatePipelineProjection() { }
