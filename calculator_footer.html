@@ -60,6 +60,33 @@
     const result_marketplaceRampFy2_Q2 = $("#marketplace-ramp-fy2-q2");
     const result_marketplaceRampFy2_Q3 = $("#marketplace-ramp-fy2-q3");
     const result_marketplaceRampFy2_Q4 = $("#marketplace-ramp-fy2-q4");
+    /* Results - Table - Referral Target */
+    const result_referralTargetFy1_Q1 = $("#referral-target-fy1-q1");
+    const result_referralTargetFy1_Q2 = $("#referral-target-fy1-q2");
+    const result_referralTargetFy1_Q3 = $("#referral-target-fy1-q3");
+    const result_referralTargetFy1_Q4 = $("#referral-target-fy1-q4");
+    const result_referralTargetFy2_Q1 = $("#referral-target-fy2-q1");
+    const result_referralTargetFy2_Q2 = $("#referral-target-fy2-q2");
+    const result_referralTargetFy2_Q3 = $("#referral-target-fy2-q3");
+    const result_referralTargetFy2_Q4 = $("#referral-target-fy2-q4");
+    /* Results - Table - Referral Projection */
+    const result_referralProjectionFy1_Q1 = $("#referral-projection-fy1-q1");
+    const result_referralProjectionFy1_Q2 = $("#referral-projection-fy1-q2");
+    const result_referralProjectionFy1_Q3 = $("#referral-projection-fy1-q3");
+    const result_referralProjectionFy1_Q4 = $("#referral-projection-fy1-q4");
+    const result_referralProjectionFy2_Q1 = $("#referral-projection-fy2-q1");
+    const result_referralProjectionFy2_Q2 = $("#referral-projection-fy2-q2");
+    const result_referralProjectionFy2_Q3 = $("#referral-projection-fy2-q3");
+    const result_referralProjectionFy2_Q4 = $("#referral-projection-fy2-q4");
+    /* Results - Table - Pipeline Projection */
+    const result_pipelineProjectionFy1_Q1 = $("#pipeline-projection-fy1-q1");
+    const result_pipelineProjectionFy1_Q2 = $("#pipeline-projection-fy1-q2");
+    const result_pipelineProjectionFy1_Q3 = $("#pipeline-projection-fy1-q3");
+    const result_pipelineProjectionFy1_Q4 = $("#pipeline-projection-fy1-q4");
+    const result_pipelineProjectionFy2_Q1 = $("#pipeline-projection-fy2-q1");
+    const result_pipelineProjectionFy2_Q2 = $("#pipeline-projection-fy2-q2");
+    const result_pipelineProjectionFy2_Q3 = $("#pipeline-projection-fy2-q3");
+    const result_pipelineProjectionFy2_Q4 = $("#pipeline-projection-fy2-q4");
     /* Ramp Variables */
     const transactibilityScalar = 100;
     const transactibilityDelay = 0;
@@ -170,9 +197,12 @@
 
     function calculateCloudSalesAssumptions() {
         /* Calculate */
-        let _annualPipelineTarget = input_baselineAnnualRevenue.attr(key_intValue) / (input_baselineBaseWinRate.attr(key_intValue) / 100);
-        let _annualOpportunities = _annualPipelineTarget / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineQ4 = 100 - input_baselineQ3.attr(key_intValue) - input_baselineQ2.attr(key_intValue) - input_baselineQ1.attr(key_intValue);
+        let _annualPipelineTarget = input_baselineAnnualRevenue.attr(key_intValue) / (
+            input_baselineBaseWinRate.attr(key_intValue) / 100);
+        let _annualOpportunities = _annualPipelineTarget / input_baselineAverageSellingPrice.attr(
+            key_intValue);
+        let _baselineQ4 = 100 - input_baselineQ3.attr(key_intValue) - input_baselineQ2.attr(
+            key_intValue) - input_baselineQ1.attr(key_intValue);
         /* Save raw values */
         result_baselineAnnualPipelineTarget.attr(key_intValue, _annualPipelineTarget);
         result_baselineAnnualOpportunities.attr(key_intValue, _annualOpportunities);
@@ -184,14 +214,26 @@
     }
 
     function calculateTableBaselinePipeline() {
-        let _baselinePipelineFy1_Q1 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ1.attr(key_intValue) / 100);
-        let _baselinePipelineFy1_Q2 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ2.attr(key_intValue) / 100);
-        let _baselinePipelineFy1_Q3 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ3.attr(key_intValue) / 100);
-        let _baselinePipelineFy1_Q4 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (result_baselineQ4.attr(key_intValue) / 100);
-        let _baselinePipelineFy2_Q1 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ1.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
-        let _baselinePipelineFy2_Q2 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ2.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
-        let _baselinePipelineFy2_Q3 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (input_baselineQ3.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
-        let _baselinePipelineFy2_Q4 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (result_baselineQ4.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(key_intValue) / 100));
+        let _baselinePipelineFy1_Q1 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            input_baselineQ1.attr(key_intValue) / 100);
+        let _baselinePipelineFy1_Q2 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            input_baselineQ2.attr(key_intValue) / 100);
+        let _baselinePipelineFy1_Q3 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            input_baselineQ3.attr(key_intValue) / 100);
+        let _baselinePipelineFy1_Q4 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            result_baselineQ4.attr(key_intValue) / 100);
+        let _baselinePipelineFy2_Q1 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            input_baselineQ1.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(
+                key_intValue) / 100));
+        let _baselinePipelineFy2_Q2 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            input_baselineQ2.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(
+                key_intValue) / 100));
+        let _baselinePipelineFy2_Q3 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            input_baselineQ3.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(
+                key_intValue) / 100));
+        let _baselinePipelineFy2_Q4 = result_baselineAnnualPipelineTarget.attr(key_intValue) * (
+            result_baselineQ4.attr(key_intValue) / 100) * (1 + (input_baselineEstAnnualGrowth.attr(
+                key_intValue) / 100));
         /* Save raw values */
         result_baselinePipelineFy1_Q1.attr(key_intValue, _baselinePipelineFy1_Q1);
         result_baselinePipelineFy1_Q2.attr(key_intValue, _baselinePipelineFy1_Q2);
@@ -213,14 +255,22 @@
     }
 
     function calculateTableBaselineOpportunities() {
-        let _baselineOpportunityFy1_Q1 = result_baselinePipelineFy1_Q1.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy1_Q2 = result_baselinePipelineFy1_Q2.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy1_Q3 = result_baselinePipelineFy1_Q3.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy1_Q4 = result_baselinePipelineFy1_Q4.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy2_Q1 = result_baselinePipelineFy2_Q1.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy2_Q2 = result_baselinePipelineFy2_Q2.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy2_Q3 = result_baselinePipelineFy2_Q3.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineOpportunityFy2_Q4 = result_baselinePipelineFy2_Q4.attr(key_intValue) / input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy1_Q1 = result_baselinePipelineFy1_Q1.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy1_Q2 = result_baselinePipelineFy1_Q2.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy1_Q3 = result_baselinePipelineFy1_Q3.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy1_Q4 = result_baselinePipelineFy1_Q4.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy2_Q1 = result_baselinePipelineFy2_Q1.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy2_Q2 = result_baselinePipelineFy2_Q2.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy2_Q3 = result_baselinePipelineFy2_Q3.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineOpportunityFy2_Q4 = result_baselinePipelineFy2_Q4.attr(key_intValue) /
+            input_baselineAverageSellingPrice.attr(key_intValue);
         /* Save raw values */
         result_baselineOpportunityFy1_Q1.attr(key_intValue, _baselineOpportunityFy1_Q1);
         result_baselineOpportunityFy1_Q2.attr(key_intValue, _baselineOpportunityFy1_Q2);
@@ -245,11 +295,21 @@
         let _baselineRevenueFy1_Q1 = result_baselineOpportunityFy1_Q1.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineRevenueFy1_Q2 = result_baselineOpportunityFy1_Q2.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
         let _baselineRevenueFy1_Q3 = result_baselineOpportunityFy1_Q3.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineRevenueFy1_Q4 = result_baselineOpportunityFy1_Q4.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineRevenueFy2_Q1 = result_baselineOpportunityFy2_Q1.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineRevenueFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineRevenueFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
-        let _baselineRevenueFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(key_intValue);
+        let _baselineRevenueFy1_Q4 = result_baselineOpportunityFy1_Q4.attr(key_intValue) * (
+            input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(
+                key_intValue);
+        let _baselineRevenueFy2_Q1 = result_baselineOpportunityFy2_Q1.attr(key_intValue) * (
+            input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(
+                key_intValue);
+        let _baselineRevenueFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (
+            input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(
+                key_intValue);
+        let _baselineRevenueFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (
+            input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(
+                key_intValue);
+        let _baselineRevenueFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (
+            input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAverageSellingPrice.attr(
+                key_intValue);
         /* Save raw values */
         result_baselineRevenueFy1_Q1.attr(key_intValue, _baselineRevenueFy1_Q1);
         result_baselineRevenueFy1_Q2.attr(key_intValue, _baselineRevenueFy1_Q2);
@@ -275,7 +335,8 @@
         for (let i = 0; i < result_transactibilityRamp.length; i++) {
             switch (input_transactabilityRamp.val()) {
                 case "linear":
-                    _linearRamp = linearRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i);
+                    _linearRamp = linearRamp(transactibilityDelay, input_transactabilityQuarters.val(),
+                        transactibilityScalar, i);
                     _minValue = Math.min(_linearRamp, transactibilityScalar);
                     result_transactibilityRamp[i] = Math.max(_minValue, 0);
                     break;
@@ -288,7 +349,8 @@
         for (let i = 0; i < result_reciprocityRamp.length; i++) {
             switch (input_reciprocityRamp.val()) {
                 case "linear":
-                    _linearRamp = linearRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
+                    _linearRamp = linearRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar,
+                        i);
                     _minValue = Math.min(_linearRamp, reciprocityScalar);
                     result_reciprocityRamp[i] = Math.max(_minValue, 0);
                     break;
@@ -330,6 +392,49 @@
         result_marketplaceRampFy2_Q4.text(formatPercentage(_marketplaceRampFy2_Q4));
     }
 
+    function calculateReferralTarget() {
+        let _referralTargetFy1_Q1 = result_baselineOpportunityFy1_Q1.attr(key_intValue) * (result_marketplaceRampFy1_Q1.attr(key_intValue) / 100);
+        let _referralTargetFy1_Q2 = result_baselineOpportunityFy1_Q2.attr(key_intValue) * (result_marketplaceRampFy1_Q2.attr(key_intValue) / 100);
+        let _referralTargetFy1_Q3 = result_baselineOpportunityFy1_Q3.attr(key_intValue) * (result_marketplaceRampFy1_Q3.attr(key_intValue) / 100);
+        let _referralTargetFy1_Q4 = result_baselineOpportunityFy1_Q4.attr(key_intValue) * (result_marketplaceRampFy1_Q4.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q1 = result_baselineOpportunityFy2_Q1.attr(key_intValue) * (
+            result_marketplaceRampFy2_Q1.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (
+            result_marketplaceRampFy2_Q2.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (
+            result_marketplaceRampFy2_Q3.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (
+            result_marketplaceRampFy2_Q4.attr(key_intValue) / 100);
+        /* Save raw values */
+        result_referralTargetFy1_Q1.attr(key_intValue, _referralTargetFy1_Q1);
+        result_referralTargetFy1_Q2.attr(key_intValue, _referralTargetFy1_Q2);
+        result_referralTargetFy1_Q3.attr(key_intValue, _referralTargetFy1_Q3);
+        result_referralTargetFy1_Q4.attr(key_intValue, _referralTargetFy1_Q4);
+        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q1);
+        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q2);
+        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q3);
+        result_referralTargetFy2_Q1.attr(key_intValue, _referralTargetFy2_Q4);
+        /* Show results */
+        result_referralTargetFy1_Q1.text(Math.round(_referralTargetFy1_Q1));
+        result_referralTargetFy1_Q2.text(Math.round(_referralTargetFy1_Q2));
+        result_referralTargetFy1_Q3.text(Math.round(_referralTargetFy1_Q3));
+        result_referralTargetFy1_Q4.text(Math.round(_referralTargetFy1_Q4));
+        result_referralTargetFy2_Q1.text(Math.round(_referralTargetFy2_Q1));
+        result_referralTargetFy2_Q2.text(Math.round(_referralTargetFy2_Q2));
+        result_referralTargetFy2_Q3.text(Math.round(_referralTargetFy2_Q3));
+        result_referralTargetFy2_Q4.text(Math.round(_referralTargetFy2_Q4));
+    }
+
+    function calculateReferralProjection() {
+        let _referralProjectionF1_Q1 = (result_reciprocityRamp[0] * input_reciprocityAssumption.attr(key_intValue)) / result_referralTargetFy1_Q1.attr(key_intValue);
+        /* Save raw values */
+        result_referralProjectionFy1_Q1.attr(key_intValue, _referralProjectionF1_Q1);
+        /* Show results */
+        result_referralProjectionFy1_Q1.text(_referralProjectionF1_Q1);
+    }
+
+    function calculatePipelineProjection() { }
+
     function runCalculations() {
         /* Run calculations */
         calculateCloudSalesAssumptions();
@@ -339,6 +444,9 @@
         calculateTransactibilityRamp();
         calculateReciprocityRamp();
         calculateMarketplaceRamp();
+        calculateReferralTarget();
+        calculateReferralProjection();
+        calculatePipelineProjection();
     }
 
     function initConfig() {
