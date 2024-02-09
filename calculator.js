@@ -126,6 +126,8 @@ let result_reciprocityRamp = new Array(9);
 const key_intValue = "internal-value";
 let isInitialized = false;
 
+const chart = require("https://cdn.jsdelivr.net/npm/chart.js");
+
 /* Grabs the internal value and set as the input val */
 $("input").on("focus", function () {
     $(this).val($(this).attr(key_intValue));
