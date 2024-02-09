@@ -698,5 +698,3 @@ function initConfig() {
 
 /* Do a first run */
 initConfig();
-
-console.log("Test");
