@@ -712,6 +712,18 @@ function createCharts() {
     chart_PipelineImpact = new Chart("chartPipelineImpact", {
         data: {
             datasets: [{
+                type: "line",
+                label: "Incoming Oppotunity Referral Projection",
+                data: [result_referralProjectionFy1_Q1.attr(key_intValue),
+                formatNumber(result_referralProjectionFy1_Q2.attr(key_intValue)),
+                formatNumber(result_referralProjectionFy1_Q3.attr(key_intValue)),
+                formatNumber(result_referralProjectionFy1_Q4.attr(key_intValue)),
+                formatNumber(result_referralProjectionFy2_Q1.attr(key_intValue)),
+                formatNumber(result_referralProjectionFy2_Q2.attr(key_intValue)),
+                formatNumber(result_referralProjectionFy2_Q3.attr(key_intValue)),
+                formatNumber(result_referralProjectionFy2_Q4.attr(key_intValue))],
+                yAxisID: "y1"
+            }, {
                 type: "bar",
                 label: "Baseline Target: Pipeline ($)",
                 data: [result_baselinePipelineFy1_Q1.attr(key_intValue),
