@@ -770,7 +770,7 @@ function createCharts() {
                 y1: {
                     type: "linear",
                     display: true,
-                    position: "right"
+                    position: "left"
                 }
             }
         }
