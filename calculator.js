@@ -194,13 +194,13 @@ $("input").on("blur", function () {
     }
     if (isInitialized) {
         runCalculations();
-        chart_PipelineImpact.update();
+        updateCharts();
     }
 });
 
 $("select").on("change", function () {
     runCalculations();
-    chart_PipelineImpact.update();
+    updateCharts();
 });
 
 function formatCurrency(num) {
@@ -788,4 +788,16 @@ function createCharts() {
             }
         }
     });
+}
+
+function updateCharts() {
+    for (let i = 0; i < chart_PipelineImpact.data.datasets.length; i++) {
+        for (let x = 0; x < chart_PipelineImpact.data.datasets[i].data.length; x++) {
+            if(i == 0) {
+                chart_PipelineImpact.data.datasets[i].data[x] = result_referralProjectionFy1_Q1.attr(key_intValue);
+            }
+        }
+    }
+
+    chart_PipelineImpact.update();
 }
