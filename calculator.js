@@ -717,14 +717,22 @@ function createCharts() {
                 data: [result_baselinePipelineFy1_Q1.attr(key_intValue),
                 result_baselinePipelineFy1_Q2.attr(key_intValue),
                 result_baselinePipelineFy1_Q3.attr(key_intValue),
-                result_baselinePipelineFy1_Q4.attr(key_intValue)]
+                result_baselinePipelineFy1_Q4.attr(key_intValue),
+                result_baselinePipelineFy2_Q1.attr(key_intValue),
+                result_baselinePipelineFy2_Q2.attr(key_intValue),
+                result_baselinePipelineFy2_Q3.attr(key_intValue),
+                result_baselinePipelineFy2_Q4.attr(key_intValue)]
             }, {
                 type: "line",
                 label: "Outgoing Opp Referral Target",
                 data: [result_referralTargetFy1_Q1.attr(key_intValue),
                 result_referralTargetFy1_Q2.attr(key_intValue),
                 result_referralTargetFy1_Q3.attr(key_intValue),
-                result_referralTargetFy1_Q4.attr(key_intValue)]
+                result_referralTargetFy1_Q4.attr(key_intValue),
+                result_referralTargetFy2_Q1.attr(key_intValue),
+                result_referralTargetFy2_Q2.attr(key_intValue),
+                result_referralTargetFy2_Q3.attr(key_intValue),
+                result_referralTargetFy2_Q4.attr(key_intValue)]
             }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"]
         }
