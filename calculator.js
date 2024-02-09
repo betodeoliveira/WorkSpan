@@ -768,23 +768,23 @@ function createCharts() {
                 backgroundColor: '#b7b7b7',
                 yAxisID: "y"
             }],
+            labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
         },
-        labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
-            options: {
-                responsive: true,
-                stacked: false,
-                scales: {
-                    y: {
-                        type: "linear",
-                        display: true,
-                        position: "left"
-                    },
-                    y1: {
-                        type: "linear",
-                        display: true,
-                        position: "right"
-                    }
+        options: {
+            responsive: true,
+            stacked: false,
+            scales: {
+                y: {
+                    type: "linear",
+                    display: true,
+                    position: "left"
+                },
+                y1: {
+                    type: "linear",
+                    display: true,
+                    position: "right"
                 }
             }
+        }
     });
 }
