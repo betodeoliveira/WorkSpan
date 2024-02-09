@@ -213,12 +213,12 @@
     }
 
     function formatPercentage(num) {
-        return num + "%";
+        return Math.floor(num) + "%";
     }
 
     function formatNumber(num, round = true) {
         let _num = parseFloat(num);
-        if(round) {
+        if (round) {
             _num = Math.round(_num);
         }
         return _num.toLocaleString("en-US");
@@ -363,13 +363,16 @@
                     break;
 
                 case "aggressive":
-                    let _aggressiveRamp;
-                    if(input_transactabilityQuarters.val() + 1 >= input_transactabilityQuarters + transactibilityDelay) {
+                    if (input_transactabilityQuarters.val() >= input_transactabilityQuarters.val() + transactibilityDelay) {
                         result_transactibilityRamp[i] = transactibilityScalar;
                     }
                     else {
-                        result_transactibilityRamp[i] = aggressiveRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i); 
+                        result_transactibilityRamp[i] = aggressiveRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i);
                     }
+                    break;
+
+                case "compounding":
+                    result_transactibilityRamp[i] = compoundingRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i);
                     break;
             }
         }
@@ -380,10 +383,22 @@
         for (let i = 0; i < result_reciprocityRamp.length; i++) {
             switch (input_reciprocityRamp.val()) {
                 case "linear":
-                    _linearRamp = linearRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar,
-                        i);
+                    _linearRamp = linearRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
                     _minValue = Math.min(_linearRamp, reciprocityScalar);
                     result_reciprocityRamp[i] = Math.max(_minValue, 0);
+                    break;
+
+                case "aggressive":
+                    if (input_reciprocityQuarters.val() + 1 >= input_reciprocityQuarters.val() + reciprocityDelay) {
+                        result_reciprocityRamp[i] = transactibilityScalar;
+                    }
+                    else {
+                        result_reciprocityRamp[i] = aggressiveRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
+                    }
+                    break;
+
+                case "compounding":
+                    result_reciprocityRamp[i] = compoundingRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
                     break;
             }
         }
@@ -396,11 +411,22 @@
 
     function aggressiveRamp(delay, duration, limit, period) {
         let _result = 0
-        if(period < delay) {
+        if (period < delay) {
             _result = 0;
         }
         else {
             _result = Math.max(Math.min(((limit * 2) / (1 + Math.exp(-(-Math.log((limit * 2) / ((limit * 2) - 1) - 1) / (((delay + (duration - 1.2)) * 2.5))) * (period - delay))) / 2 - (duration - 1)) * 2 - (limit / 2), limit), 0);
+        }
+        return _result;
+    }
+
+    function compoundingRamp(delay, duration, limit, period) {
+        let _result = 0;
+        if (period < delay) {
+            
+        }
+        else {
+            _result = Math.max(Math.min((limit * 2) / (1 + Math.exp(-(-Math.log((limit * 2) / ((limit * 2) - 1) - 1) / ((2 * duration + 1) * 1.1 - (duration))) * ((period) - (delay) - ((duration) - 1)))) - 1, (limit)), 0);
         }
         return _result;
     }
