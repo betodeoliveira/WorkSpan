@@ -794,7 +794,7 @@ function updateCharts() {
     for (let i = 0; i < chart_PipelineImpact.data.datasets.length; i++) {
         for (let x = 0; x < chart_PipelineImpact.data.datasets[i].data.length; x++) {
             if(i == 0) {
-                chart_PipelineImpact.data.datasets[i].data[x] = result_referralProjectionFy1_Q1.attr(key_intValue);
+                chart_PipelineImpact.data.datasets[i].data[x] = result_referralProjectionFy1_Q3.attr(key_intValue);
             }
         }
     }
