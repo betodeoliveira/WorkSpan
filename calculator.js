@@ -657,7 +657,7 @@ scriptChartJS.onload = function () {
     createCharts();
 }
 document.head.appendChild(scriptChartJS);
-const chart_PipelineImpact;
+let chart_PipelineImpact;
 
 
 
