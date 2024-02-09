@@ -770,6 +770,7 @@ function createCharts() {
             }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
             options: {
+                responsive: true,
                 stacked: false,
                 scales: {
                     y: {
