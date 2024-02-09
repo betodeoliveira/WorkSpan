@@ -724,18 +724,6 @@ function createCharts() {
                 formatNumber(result_referralProjectionFy2_Q4.attr(key_intValue))],
                 yAxisID: "y1"
             }, {
-                type: "bar",
-                label: "Baseline Target: Pipeline ($)",
-                data: [result_baselinePipelineFy1_Q1.attr(key_intValue),
-                result_baselinePipelineFy1_Q2.attr(key_intValue),
-                result_baselinePipelineFy1_Q3.attr(key_intValue),
-                result_baselinePipelineFy1_Q4.attr(key_intValue),
-                result_baselinePipelineFy2_Q1.attr(key_intValue),
-                result_baselinePipelineFy2_Q2.attr(key_intValue),
-                result_baselinePipelineFy2_Q3.attr(key_intValue),
-                result_baselinePipelineFy2_Q4.attr(key_intValue)],
-                yAxisID: "y"
-            }, {
                 type: "line",
                 label: "Outgoing Opp Referral Target",
                 data: [result_referralTargetFy1_Q1.attr(key_intValue),
@@ -747,6 +735,30 @@ function createCharts() {
                 formatNumber(result_referralTargetFy2_Q3.attr(key_intValue)),
                 formatNumber(result_referralTargetFy2_Q4.attr(key_intValue))],
                 yAxisID: "y1"
+            }, {
+                type: "bar",
+                label: "Pipeline Increase Projection",
+                data: [result_pipelineProjectionFy1_Q1.attr(key_intValue),
+                    result_pipelineProjectionFy1_Q2.attr(key_intValue),
+                    result_pipelineProjectionFy1_Q3.attr(key_intValue),
+                    result_pipelineProjectionFy1_Q4.attr(key_intValue),
+                    result_pipelineProjectionFy2_Q1.attr(key_intValue),
+                    result_pipelineProjectionFy2_Q2.attr(key_intValue),
+                    result_pipelineProjectionFy2_Q3.attr(key_intValue),
+                    result_pipelineProjectionFy2_Q4.attr(key_intValue)],
+                yAxisID: "y"
+            }, {
+                type: "bar",
+                label: "Baseline Target: Pipeline ($)",
+                data: [result_baselinePipelineFy1_Q1.attr(key_intValue),
+                result_baselinePipelineFy1_Q2.attr(key_intValue),
+                result_baselinePipelineFy1_Q3.attr(key_intValue),
+                result_baselinePipelineFy1_Q4.attr(key_intValue),
+                result_baselinePipelineFy2_Q1.attr(key_intValue),
+                result_baselinePipelineFy2_Q2.attr(key_intValue),
+                result_baselinePipelineFy2_Q3.attr(key_intValue),
+                result_baselinePipelineFy2_Q4.attr(key_intValue)],
+                yAxisID: "y"
             }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
             scales: {
