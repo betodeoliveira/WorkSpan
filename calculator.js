@@ -722,6 +722,8 @@ function createCharts() {
                 formatNumber(result_referralProjectionFy2_Q2.attr(key_intValue)),
                 formatNumber(result_referralProjectionFy2_Q3.attr(key_intValue)),
                 formatNumber(result_referralProjectionFy2_Q4.attr(key_intValue))],
+                borderColor: '#8c1af5',
+                backgroundColor: '#8c1af5',
                 yAxisID: "y1"
             }, {
                 type: "line",
@@ -734,18 +736,22 @@ function createCharts() {
                 formatNumber(result_referralTargetFy2_Q2.attr(key_intValue)),
                 formatNumber(result_referralTargetFy2_Q3.attr(key_intValue)),
                 formatNumber(result_referralTargetFy2_Q4.attr(key_intValue))],
+                borderColor: '#eba944',
+                backgroundColor: '#eba944',
                 yAxisID: "y1"
             }, {
                 type: "bar",
                 label: "Pipeline Increase Projection",
                 data: [result_pipelineProjectionFy1_Q1.attr(key_intValue),
-                    result_pipelineProjectionFy1_Q2.attr(key_intValue),
-                    result_pipelineProjectionFy1_Q3.attr(key_intValue),
-                    result_pipelineProjectionFy1_Q4.attr(key_intValue),
-                    result_pipelineProjectionFy2_Q1.attr(key_intValue),
-                    result_pipelineProjectionFy2_Q2.attr(key_intValue),
-                    result_pipelineProjectionFy2_Q3.attr(key_intValue),
-                    result_pipelineProjectionFy2_Q4.attr(key_intValue)],
+                result_pipelineProjectionFy1_Q2.attr(key_intValue),
+                result_pipelineProjectionFy1_Q3.attr(key_intValue),
+                result_pipelineProjectionFy1_Q4.attr(key_intValue),
+                result_pipelineProjectionFy2_Q1.attr(key_intValue),
+                result_pipelineProjectionFy2_Q2.attr(key_intValue),
+                result_pipelineProjectionFy2_Q3.attr(key_intValue),
+                result_pipelineProjectionFy2_Q4.attr(key_intValue)],
+                borderColor: '#61bce5',
+                backgroundColor: '#61bce5',
                 yAxisID: "y"
             }, {
                 type: "bar",
@@ -758,6 +764,8 @@ function createCharts() {
                 result_baselinePipelineFy2_Q2.attr(key_intValue),
                 result_baselinePipelineFy2_Q3.attr(key_intValue),
                 result_baselinePipelineFy2_Q4.attr(key_intValue)],
+                borderColor: '#b7b7b7',
+                backgroundColor: '#b7b7b7',
                 yAxisID: "y"
             }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
