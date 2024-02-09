@@ -200,6 +200,10 @@
         }
     });
 
+    $("select").on("change", function () {
+        runCalculations();
+    });
+
     function formatCurrency(num) {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -349,14 +353,23 @@
     }
 
     function calculateTransactibilityRamp() {
-        let _linearRamp, _minValue;
         for (let i = 0; i < result_transactibilityRamp.length; i++) {
             switch (input_transactabilityRamp.val()) {
                 case "linear":
-                    _linearRamp = linearRamp(transactibilityDelay, input_transactabilityQuarters.val(),
-                        transactibilityScalar, i);
+                    let _linearRamp, _minValue;
+                    _linearRamp = linearRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i);
                     _minValue = Math.min(_linearRamp, transactibilityScalar);
                     result_transactibilityRamp[i] = Math.max(_minValue, 0);
+                    break;
+
+                case "aggressive":
+                    let _aggressiveRamp;
+                    if(input_transactabilityQuarters.val() + 1 >= input_transactabilityQuarters + transactibilityDelay) {
+                        result_transactibilityRamp[i] = transactibilityScalar;
+                    }
+                    else {
+                        result_transactibilityRamp[i] = aggressiveRamp(transactibilityDelay, input_transactabilityQuarters.val(), transactibilityScalar, i); 
+                    }
                     break;
             }
         }
@@ -378,6 +391,17 @@
 
     function linearRamp(delay, duration, limit, period) {
         let _result = limit / duration * period + (0 - ((limit / duration) * delay));
+        return _result;
+    }
+
+    function aggressiveRamp(delay, duration, limit, period) {
+        let _result = 0
+        if(period < delay) {
+            _result = 0;
+        }
+        else {
+            _result = Math.max(Math.min(((limit * 2) / (1 + Math.exp(-(-Math.log((limit * 2) / ((limit * 2) - 1) - 1) / (((delay + (duration - 1.2)) * 2.5))) * (period - delay))) / 2 - (duration - 1)) * 2 - (limit / 2), limit), 0);
+        }
         return _result;
     }
 
