@@ -654,9 +654,10 @@ function projectedRevenueFormula(baselineRevenue, revenueImpact, referralProject
 let scriptChartJS = document.createElement("script");
 scriptChartJS.src = "https://cdn.jsdelivr.net/npm/chart.js";
 scriptChartJS.onload = function () {
-    
+    createCharts();
 }
 document.head.appendChild(scriptChartJS);
+const chart_PipelineImpact;
 
 
 
@@ -708,22 +709,24 @@ function initConfig() {
 initConfig();
 
 function createCharts() {
-    new Chart("chartPipelineImpact", {
-        type: 'bar',
+    chart_PipelineImpact = new Chart("chartPipelineImpact", {
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
+            datasets: [{
+                type: "bar",
+                label: "Baseline Target: Pipeline ($)",
+                data: [result_baselinePipelineFy1_Q1.attr(key_intValue),
+                result_baselinePipelineFy1_Q2.attr(key_intValue),
+                result_baselinePipelineFy1_Q3.attr(key_intValue),
+                result_baselinePipelineFy1_Q4.attr(key_intValue)]
+            }, {
+                type: "line",
+                label: "Outgoing Opp Referral Target",
+                data: [result_referralTargetFy1_Q1.attr(key_intValue),
+                result_referralTargetFy1_Q2.attr(key_intValue),
+                result_referralTargetFy1_Q3.attr(key_intValue),
+                result_referralTargetFy1_Q4.attr(key_intValue)]
+            }],
+            labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"]
         }
-      });
+    });
 }
