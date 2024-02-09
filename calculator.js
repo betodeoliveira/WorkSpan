@@ -721,20 +721,34 @@ function createCharts() {
                 result_baselinePipelineFy2_Q1.attr(key_intValue),
                 result_baselinePipelineFy2_Q2.attr(key_intValue),
                 result_baselinePipelineFy2_Q3.attr(key_intValue),
-                result_baselinePipelineFy2_Q4.attr(key_intValue)]
+                result_baselinePipelineFy2_Q4.attr(key_intValue)],
+                yAxisID: "y"
             }, {
                 type: "line",
                 label: "Outgoing Opp Referral Target",
                 data: [result_referralTargetFy1_Q1.attr(key_intValue),
-                result_referralTargetFy1_Q2.attr(key_intValue),
-                result_referralTargetFy1_Q3.attr(key_intValue),
-                result_referralTargetFy1_Q4.attr(key_intValue),
-                result_referralTargetFy2_Q1.attr(key_intValue),
-                result_referralTargetFy2_Q2.attr(key_intValue),
-                result_referralTargetFy2_Q3.attr(key_intValue),
-                result_referralTargetFy2_Q4.attr(key_intValue)]
+                formatNumber(result_referralTargetFy1_Q2.attr(key_intValue)),
+                formatNumber(result_referralTargetFy1_Q3.attr(key_intValue)),
+                formatNumber(result_referralTargetFy1_Q4.attr(key_intValue)),
+                formatNumber(result_referralTargetFy2_Q1.attr(key_intValue)),
+                formatNumber(result_referralTargetFy2_Q2.attr(key_intValue)),
+                formatNumber(result_referralTargetFy2_Q3.attr(key_intValue)),
+                formatNumber(result_referralTargetFy2_Q4.attr(key_intValue))],
+                yAxisID: "y1"
             }],
-            labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"]
+            labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
+            scales: {
+                y: {
+                    type: "linear",
+                    display: true,
+                    position: "left"
+                },
+                y1: {
+                    type: "linear",
+                    display: true,
+                    position: "right"
+                }
+            }
         }
     });
 }
