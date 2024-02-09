@@ -774,7 +774,6 @@ function createCharts() {
         },
         options: {
             responsive: true,
-            stacked: true,
             scales: {
                 y: {
                     type: "linear",
