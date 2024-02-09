@@ -115,18 +115,14 @@ const transactibilityScalar = 100;
 const transactibilityDelay = 0;
 const reciprocityScalar = 100;
 const reciprocityDelay = 2;
-
 /* We are not going to create results variables for all ramp types
 we will use 9 variables that will be updated based on the ramp that is selected. */
 /* Results - Ramps */
 let result_transactibilityRamp = new Array(9);
 let result_reciprocityRamp = new Array(9);
-
 /* General Variables */
 const key_intValue = "internal-value";
 let isInitialized = false;
-
-const chart = require("https://cdn.jsdelivr.net/npm/chart.js");
 
 /* Grabs the internal value and set as the input val */
 $("input").on("focus", function () {
@@ -654,6 +650,16 @@ function projectedRevenueFormula(baselineRevenue, revenueImpact, referralProject
     return _result;
 }
 
+/* Chart.js Script */
+let scriptChartJS = document.createElement("script");
+scriptChartJS.src = "https://cdn.jsdelivr.net/npm/chart.js";
+scriptChartJS.onload = function () {
+    
+}
+document.head.appendChild(scriptChartJS);
+
+
+
 function runCalculations() {
     /* Run calculations */
     calculateCloudSalesAssumptions();
@@ -700,3 +706,24 @@ function initConfig() {
 
 /* Do a first run */
 initConfig();
+
+function createCharts() {
+    new Chart("chartPipelineImpact", {
+        type: 'bar',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+}
