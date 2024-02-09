@@ -194,11 +194,13 @@ $("input").on("blur", function () {
     }
     if (isInitialized) {
         runCalculations();
+        chart_PipelineImpact.update();
     }
 });
 
 $("select").on("change", function () {
     runCalculations();
+    chart_PipelineImpact.update();
 });
 
 function formatCurrency(num) {
@@ -772,7 +774,7 @@ function createCharts() {
         },
         options: {
             responsive: true,
-            stacked: false,
+            stacked: true,
             scales: {
                 y: {
                     type: "linear",
