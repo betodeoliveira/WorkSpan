@@ -761,16 +761,18 @@ function createCharts() {
                 yAxisID: "y"
             }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
-            scales: {
-                y: {
-                    type: "linear",
-                    display: true,
-                    position: "left"
-                },
-                y1: {
-                    type: "linear",
-                    display: true,
-                    position: "right"
+            options: {
+                scales: {
+                    y: {
+                        type: "linear",
+                        display: true,
+                        position: "left"
+                    },
+                    y1: {
+                        type: "linear",
+                        display: true,
+                        position: "right"
+                    }
                 }
             }
         }
