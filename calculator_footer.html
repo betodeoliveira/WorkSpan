@@ -51,6 +51,7 @@
     const result_baselineRevenueFy2_Q2 = $("#baseline-revenue-fy2-q2");
     const result_baselineRevenueFy2_Q3 = $("#baseline-revenue-fy2-q3");
     const result_baselineRevenueFy2_Q4 = $("#baseline-revenue-fy2-q4");
+    const result_baselineRevenueTotal = $("#baseline-revenue-total");
     /* Results - Table - Marketplace Ramp */
     const result_marketplaceRampFy1_Q1 = $("#marketplace-ramp-fy1-q1");
     const result_marketplaceRampFy1_Q2 = $("#marketplace-ramp-fy1-q2");
@@ -69,6 +70,7 @@
     const result_referralTargetFy2_Q2 = $("#referral-target-fy2-q2");
     const result_referralTargetFy2_Q3 = $("#referral-target-fy2-q3");
     const result_referralTargetFy2_Q4 = $("#referral-target-fy2-q4");
+    const result_referralTargetTotal = $("#referral-target-total");
     /* Results - Table - Referral Projection */
     const result_referralProjectionFy1_Q1 = $("#referral-projection-fy1-q1");
     const result_referralProjectionFy1_Q2 = $("#referral-projection-fy1-q2");
@@ -78,6 +80,7 @@
     const result_referralProjectionFy2_Q2 = $("#referral-projection-fy2-q2");
     const result_referralProjectionFy2_Q3 = $("#referral-projection-fy2-q3");
     const result_referralProjectionFy2_Q4 = $("#referral-projection-fy2-q4");
+    const result_referralProjectionTotal = $("#referral-projection-total");
     /* Results - Table - Pipeline Projection */
     const result_pipelineProjectionFy1_Q1 = $("#pipeline-projection-fy1-q1");
     const result_pipelineProjectionFy1_Q2 = $("#pipeline-projection-fy1-q2");
@@ -87,6 +90,7 @@
     const result_pipelineProjectionFy2_Q2 = $("#pipeline-projection-fy2-q2");
     const result_pipelineProjectionFy2_Q3 = $("#pipeline-projection-fy2-q3");
     const result_pipelineProjectionFy2_Q4 = $("#pipeline-projection-fy2-q4");
+    const result_pipelineProjectionTotal = $("#pipeline-projection-total");
     /* Results - Table - Revenue Impact */
     const result_revenueImpactFy1_Q1 = $("#revenue-impact-fy1-q1");
     const result_revenueImpactFy1_Q2 = $("#revenue-impact-fy1-q2");
@@ -96,6 +100,7 @@
     const result_revenueImpactFy2_Q2 = $("#revenue-impact-fy2-q2");
     const result_revenueImpactFy2_Q3 = $("#revenue-impact-fy2-q3");
     const result_revenueImpactFy2_Q4 = $("#revenue-impact-fy2-q4");
+    const result_revenueImpactTotal = $("#revenue-impact-total");
     /* Results - Table - Revenue Impact */
     const result_projectedRevenueFy1_Q1 = $("#projected-revenue-fy1-q1");
     const result_projectedRevenueFy1_Q2 = $("#projected-revenue-fy1-q2");
@@ -105,6 +110,7 @@
     const result_projectedRevenueFy2_Q2 = $("#projected-revenue-fy2-q2");
     const result_projectedRevenueFy2_Q3 = $("#projected-revenue-fy2-q3");
     const result_projectedRevenueFy2_Q4 = $("#projected-revenue-fy2-q4");
+    const result_projectedRevenueTotal = $("#projected-revenue-total");
     /* Ramp Variables */
     const transactibilityScalar = 100;
     const transactibilityDelay = 0;
@@ -319,6 +325,7 @@
         let _baselineRevenueFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAvgSellingPrice.attr(key_intValue);
         let _baselineRevenueFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAvgSellingPrice.attr(key_intValue);
         let _baselineRevenueFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (input_baselineBaseWinRate.attr(key_intValue) / 100) * input_baselineAvgSellingPrice.attr(key_intValue);
+        let _baselineRevenueTotal = _baselineRevenueFy1_Q1 + _baselineRevenueFy1_Q2 + _baselineRevenueFy1_Q3 + _baselineRevenueFy1_Q4 + _baselineRevenueFy2_Q1 + _baselineRevenueFy2_Q2 + _baselineRevenueFy2_Q3 + _baselineRevenueFy2_Q4;
         /* Save raw values */
         result_baselineRevenueFy1_Q1.attr(key_intValue, _baselineRevenueFy1_Q1);
         result_baselineRevenueFy1_Q2.attr(key_intValue, _baselineRevenueFy1_Q2);
@@ -328,6 +335,7 @@
         result_baselineRevenueFy2_Q2.attr(key_intValue, _baselineRevenueFy2_Q2);
         result_baselineRevenueFy2_Q3.attr(key_intValue, _baselineRevenueFy2_Q3);
         result_baselineRevenueFy2_Q4.attr(key_intValue, _baselineRevenueFy2_Q4);
+        result_baselineRevenueTotal.attr(key_intValue, _baselineRevenueTotal);
         /* Show results */
         result_baselineRevenueFy1_Q1.text(formatCurrency(_baselineRevenueFy1_Q1));
         result_baselineRevenueFy1_Q2.text(formatCurrency(_baselineRevenueFy1_Q2));
@@ -337,6 +345,7 @@
         result_baselineRevenueFy2_Q2.text(formatCurrency(_baselineRevenueFy2_Q2));
         result_baselineRevenueFy2_Q3.text(formatCurrency(_baselineRevenueFy2_Q3));
         result_baselineRevenueFy2_Q4.text(formatCurrency(_baselineRevenueFy2_Q4));
+        result_baselineRevenueTotal.text(formatCurrency(_baselineRevenueTotal));
     }
 
     function calculateTransactibilityRamp() {
@@ -406,14 +415,11 @@
         let _referralTargetFy1_Q2 = result_baselineOpportunityFy1_Q2.attr(key_intValue) * (result_marketplaceRampFy1_Q2.attr(key_intValue) / 100);
         let _referralTargetFy1_Q3 = result_baselineOpportunityFy1_Q3.attr(key_intValue) * (result_marketplaceRampFy1_Q3.attr(key_intValue) / 100);
         let _referralTargetFy1_Q4 = result_baselineOpportunityFy1_Q4.attr(key_intValue) * (result_marketplaceRampFy1_Q4.attr(key_intValue) / 100);
-        let _referralTargetFy2_Q1 = result_baselineOpportunityFy2_Q1.attr(key_intValue) * (
-            result_marketplaceRampFy2_Q1.attr(key_intValue) / 100);
-        let _referralTargetFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (
-            result_marketplaceRampFy2_Q2.attr(key_intValue) / 100);
-        let _referralTargetFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (
-            result_marketplaceRampFy2_Q3.attr(key_intValue) / 100);
-        let _referralTargetFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (
-            result_marketplaceRampFy2_Q4.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q1 = result_baselineOpportunityFy2_Q1.attr(key_intValue) * (result_marketplaceRampFy2_Q1.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q2 = result_baselineOpportunityFy2_Q2.attr(key_intValue) * (result_marketplaceRampFy2_Q2.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q3 = result_baselineOpportunityFy2_Q3.attr(key_intValue) * (result_marketplaceRampFy2_Q3.attr(key_intValue) / 100);
+        let _referralTargetFy2_Q4 = result_baselineOpportunityFy2_Q4.attr(key_intValue) * (result_marketplaceRampFy2_Q4.attr(key_intValue) / 100);
+        let _referralTargetTotal = _referralTargetFy1_Q1 + _referralTargetFy1_Q2 + _referralTargetFy1_Q3 + _referralTargetFy1_Q4 + _referralTargetFy2_Q1 + _referralTargetFy2_Q2 + _referralTargetFy2_Q3 + _referralTargetFy2_Q4;
         /* Save raw values */
         result_referralTargetFy1_Q1.attr(key_intValue, _referralTargetFy1_Q1);
         result_referralTargetFy1_Q2.attr(key_intValue, _referralTargetFy1_Q2);
@@ -423,6 +429,7 @@
         result_referralTargetFy2_Q2.attr(key_intValue, _referralTargetFy2_Q2);
         result_referralTargetFy2_Q3.attr(key_intValue, _referralTargetFy2_Q3);
         result_referralTargetFy2_Q4.attr(key_intValue, _referralTargetFy2_Q4);
+        result_referralTargetTotal.attr(key_intValue, _referralTargetTotal);
         /* Show results */
         result_referralTargetFy1_Q1.text(formatNumber(_referralTargetFy1_Q1));
         result_referralTargetFy1_Q2.text(formatNumber(_referralTargetFy1_Q2));
@@ -432,6 +439,7 @@
         result_referralTargetFy2_Q2.text(formatNumber(_referralTargetFy2_Q2));
         result_referralTargetFy2_Q3.text(formatNumber(_referralTargetFy2_Q3));
         result_referralTargetFy2_Q4.text(formatNumber(_referralTargetFy2_Q4));
+        result_referralTargetTotal.text(formatNumber(_referralTargetTotal));
     }
 
     function calculateReferralProjection() {
@@ -445,6 +453,7 @@
         let _referralProjectionFy2_Q2 = (result_reciprocityRamp[5] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q2.attr(key_intValue);
         let _referralProjectionFy2_Q3 = (result_reciprocityRamp[6] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q3.attr(key_intValue);
         let _referralProjectionFy2_Q4 = (result_reciprocityRamp[7] * input_reciprocityAssumption.attr(key_intValue)) / 10000 * result_referralTargetFy2_Q4.attr(key_intValue);
+        let _referralProjectionTotal = _referralProjectionFy1_Q1 + _referralProjectionFy1_Q2 + _referralProjectionFy1_Q3 + _referralProjectionFy1_Q4 + _referralProjectionFy2_Q1 + _referralProjectionFy2_Q2 + _referralProjectionFy2_Q3 + _referralProjectionFy2_Q4;
         /* Save raw values */
         result_referralProjectionFy1_Q1.attr(key_intValue, _referralProjectionFy1_Q1);
         result_referralProjectionFy1_Q2.attr(key_intValue, _referralProjectionFy1_Q2);
@@ -454,6 +463,7 @@
         result_referralProjectionFy2_Q2.attr(key_intValue, _referralProjectionFy2_Q2);
         result_referralProjectionFy2_Q3.attr(key_intValue, _referralProjectionFy2_Q3);
         result_referralProjectionFy2_Q4.attr(key_intValue, _referralProjectionFy2_Q4);
+        result_referralProjectionTotal.attr(key_intValue, _referralProjectionTotal);
         /* Show results */
         result_referralProjectionFy1_Q1.text(formatNumber(_referralProjectionFy1_Q1));
         result_referralProjectionFy1_Q2.text(formatNumber(_referralProjectionFy1_Q2));
@@ -463,6 +473,7 @@
         result_referralProjectionFy2_Q2.text(formatNumber(_referralProjectionFy2_Q2));
         result_referralProjectionFy2_Q3.text(formatNumber(_referralProjectionFy2_Q3));
         result_referralProjectionFy2_Q4.text(formatNumber(_referralProjectionFy2_Q4));
+        result_referralProjectionTotal.text(formatNumber(_referralProjectionTotal));
     }
 
     function calculatePipelineProjection() {
@@ -474,6 +485,7 @@
         let _pipelineProjectionFy2_Q2 = pipelineProjectionFormula(result_referralTargetFy2_Q2.attr(key_intValue), result_referralProjectionFy2_Q2.attr(key_intValue));
         let _pipelineProjectionFy2_Q3 = pipelineProjectionFormula(result_referralTargetFy2_Q3.attr(key_intValue), result_referralProjectionFy2_Q3.attr(key_intValue));
         let _pipelineProjectionFy2_Q4 = pipelineProjectionFormula(result_referralTargetFy2_Q4.attr(key_intValue), result_referralProjectionFy2_Q4.attr(key_intValue));
+        let _pipelineProjectionTotal = _pipelineProjectionFy1_Q1 + _pipelineProjectionFy1_Q2 + _pipelineProjectionFy1_Q3 + _pipelineProjectionFy1_Q4 + _pipelineProjectionFy2_Q1 + _pipelineProjectionFy2_Q2 + _pipelineProjectionFy2_Q3 + _pipelineProjectionFy2_Q4;
         /* Save raw values */
         result_pipelineProjectionFy1_Q1.attr(key_intValue, _pipelineProjectionFy1_Q1);
         result_pipelineProjectionFy1_Q2.attr(key_intValue, _pipelineProjectionFy1_Q2);
@@ -483,6 +495,7 @@
         result_pipelineProjectionFy2_Q2.attr(key_intValue, _pipelineProjectionFy2_Q2);
         result_pipelineProjectionFy2_Q3.attr(key_intValue, _pipelineProjectionFy2_Q3);
         result_pipelineProjectionFy2_Q4.attr(key_intValue, _pipelineProjectionFy2_Q4);
+        result_pipelineProjectionTotal.attr(key_intValue, _pipelineProjectionTotal);
         /* Show results */
         result_pipelineProjectionFy1_Q1.text(formatCurrency(_pipelineProjectionFy1_Q1));
         result_pipelineProjectionFy1_Q2.text(formatCurrency(_pipelineProjectionFy1_Q2));
@@ -492,6 +505,7 @@
         result_pipelineProjectionFy2_Q2.text(formatCurrency(_pipelineProjectionFy2_Q2));
         result_pipelineProjectionFy2_Q3.text(formatCurrency(_pipelineProjectionFy2_Q3));
         result_pipelineProjectionFy2_Q4.text(formatCurrency(_pipelineProjectionFy2_Q4));
+        result_pipelineProjectionTotal.text(formatCurrency(_pipelineProjectionTotal));
     }
 
     function pipelineProjectionFormula(referralTarget, referralProjection) {
@@ -512,6 +526,7 @@
         let _revenueImpactFy2_Q2 = revenueImpactFormula(result_referralTargetFy2_Q2.attr(key_intValue), result_referralProjectionFy2_Q2.attr(key_intValue));
         let _revenueImpactFy2_Q3 = revenueImpactFormula(result_referralTargetFy2_Q3.attr(key_intValue), result_referralProjectionFy2_Q3.attr(key_intValue));
         let _revenueImpactFy2_Q4 = revenueImpactFormula(result_referralTargetFy2_Q4.attr(key_intValue), result_referralProjectionFy2_Q4.attr(key_intValue));
+        let _revenueImpactTotal = _revenueImpactFy1_Q1 + _revenueImpactFy1_Q2 + _revenueImpactFy1_Q3 + _revenueImpactFy1_Q4 + _revenueImpactFy2_Q1 + _revenueImpactFy2_Q2 + _revenueImpactFy2_Q3 + _revenueImpactFy2_Q4;
         /* Save raw values */
         result_revenueImpactFy1_Q1.attr(key_intValue, _revenueImpactFy1_Q1);
         result_revenueImpactFy1_Q2.attr(key_intValue, _revenueImpactFy1_Q2);
@@ -521,6 +536,7 @@
         result_revenueImpactFy2_Q2.attr(key_intValue, _revenueImpactFy2_Q2);
         result_revenueImpactFy2_Q3.attr(key_intValue, _revenueImpactFy2_Q3);
         result_revenueImpactFy2_Q4.attr(key_intValue, _revenueImpactFy2_Q4);
+        result_revenueImpactTotal.attr(key_intValue, _revenueImpactTotal);
         /* Show results */
         result_revenueImpactFy1_Q1.text(formatCurrency(_revenueImpactFy1_Q1));
         result_revenueImpactFy1_Q2.text(formatCurrency(_revenueImpactFy1_Q2));
@@ -530,6 +546,7 @@
         result_revenueImpactFy2_Q2.text(formatCurrency(_revenueImpactFy2_Q2));
         result_revenueImpactFy2_Q3.text(formatCurrency(_revenueImpactFy2_Q3));
         result_revenueImpactFy2_Q4.text(formatCurrency(_revenueImpactFy2_Q4));
+        result_revenueImpactTotal.text(formatCurrency(_revenueImpactTotal));
     }
 
     function revenueImpactFormula(referralTarget, referralProjection) {
@@ -544,11 +561,46 @@
     }
 
     function calculateProjectedRevenue() {
-        
+        let _projectedRevenueFy1_Q1 = parseFloat(result_baselineRevenueFy1_Q1.attr(key_intValue)) + parseFloat(result_revenueImpactFy1_Q1.attr(key_intValue));
+        let _projectedRevenueFy1_Q2 = projectedRevenueFormula(result_baselineRevenueFy1_Q2.attr(key_intValue), result_revenueImpactFy1_Q2.attr(key_intValue), result_referralProjectionFy1_Q2.attr(key_intValue));
+        let _projectedRevenueFy1_Q3 = projectedRevenueFormula(result_baselineRevenueFy1_Q3.attr(key_intValue), result_revenueImpactFy1_Q3.attr(key_intValue), result_referralProjectionFy1_Q3.attr(key_intValue));
+        let _projectedRevenueFy1_Q4 = projectedRevenueFormula(result_baselineRevenueFy1_Q4.attr(key_intValue), result_revenueImpactFy1_Q4.attr(key_intValue), result_referralProjectionFy1_Q4.attr(key_intValue));
+        let _projectedRevenueFy2_Q1 = projectedRevenueFormula(result_baselineRevenueFy2_Q1.attr(key_intValue), result_revenueImpactFy2_Q1.attr(key_intValue), result_referralProjectionFy2_Q1.attr(key_intValue));
+        let _projectedRevenueFy2_Q2 = projectedRevenueFormula(result_baselineRevenueFy2_Q2.attr(key_intValue), result_revenueImpactFy2_Q2.attr(key_intValue), result_referralProjectionFy2_Q2.attr(key_intValue));
+        let _projectedRevenueFy2_Q3 = projectedRevenueFormula(result_baselineRevenueFy2_Q3.attr(key_intValue), result_revenueImpactFy2_Q3.attr(key_intValue), result_referralProjectionFy2_Q3.attr(key_intValue));
+        let _projectedRevenueFy2_Q4 = projectedRevenueFormula(result_baselineRevenueFy2_Q4.attr(key_intValue), result_revenueImpactFy2_Q4.attr(key_intValue), result_referralProjectionFy2_Q4.attr(key_intValue));
+        let _projectedRevenueTotal = _projectedRevenueFy1_Q1 + _projectedRevenueFy1_Q2 + _projectedRevenueFy1_Q3 + _projectedRevenueFy1_Q4 + _projectedRevenueFy2_Q1 + _projectedRevenueFy2_Q2 + _projectedRevenueFy2_Q3 + _projectedRevenueFy2_Q4;
+        /* Save raw values */
+        result_projectedRevenueFy1_Q1.attr(key_intValue, _projectedRevenueFy1_Q1);
+        result_projectedRevenueFy1_Q2.attr(key_intValue, _projectedRevenueFy1_Q2);
+        result_projectedRevenueFy1_Q3.attr(key_intValue, _projectedRevenueFy1_Q3);
+        result_projectedRevenueFy1_Q4.attr(key_intValue, _projectedRevenueFy1_Q4);
+        result_projectedRevenueFy2_Q1.attr(key_intValue, _projectedRevenueFy2_Q1);
+        result_projectedRevenueFy2_Q2.attr(key_intValue, _projectedRevenueFy2_Q2);
+        result_projectedRevenueFy2_Q3.attr(key_intValue, _projectedRevenueFy2_Q3);
+        result_projectedRevenueFy2_Q4.attr(key_intValue, _projectedRevenueFy2_Q4);
+        result_projectedRevenueTotal.attr(key_intValue, _projectedRevenueTotal);
+        /* Show results */
+        result_projectedRevenueFy1_Q1.text(formatCurrency(_projectedRevenueFy1_Q1));
+        result_projectedRevenueFy1_Q2.text(formatCurrency(_projectedRevenueFy1_Q2));
+        result_projectedRevenueFy1_Q3.text(formatCurrency(_projectedRevenueFy1_Q3));
+        result_projectedRevenueFy1_Q4.text(formatCurrency(_projectedRevenueFy1_Q4));
+        result_projectedRevenueFy2_Q1.text(formatCurrency(_projectedRevenueFy2_Q1));
+        result_projectedRevenueFy2_Q2.text(formatCurrency(_projectedRevenueFy2_Q2));
+        result_projectedRevenueFy2_Q3.text(formatCurrency(_projectedRevenueFy2_Q3));
+        result_projectedRevenueFy2_Q4.text(formatCurrency(_projectedRevenueFy2_Q4));
+        result_projectedRevenueTotal.text(formatCurrency(_projectedRevenueTotal));
     }
 
-    function projectedRevenueFormula(baselineRevenue, ) {
-        
+    function projectedRevenueFormula(baselineRevenue, revenueImpact, referralProjection) {
+        baselineRevenue = parseFloat(baselineRevenue);
+        revenueImpact = parseFloat(revenueImpact);
+        referralProjection = parseFloat(referralProjection);
+        let _avgSellingPrice = parseFloat(input_baselineAvgSellingPrice.attr(key_intValue));
+        let _winRate = parseFloat(input_winRateAssumption.attr(key_intValue) / 100);
+        let _aspAssumption = parseFloat(input_aspAssumption.attr(key_intValue) / 100);
+        let _result = baselineRevenue + revenueImpact + referralProjection * _avgSellingPrice * _winRate * _aspAssumption;
+        return _result;
     }
 
     function runCalculations() {
