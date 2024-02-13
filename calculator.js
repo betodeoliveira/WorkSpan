@@ -733,14 +733,7 @@ function createCharts() {
             }, {
                 type: "bar",
                 label: "Pipeline Increase Projection",
-                data: [result_pipelineProjectionFy1_Q1.attr(key_intValue),
-                result_pipelineProjectionFy1_Q2.attr(key_intValue),
-                result_pipelineProjectionFy1_Q3.attr(key_intValue),
-                result_pipelineProjectionFy1_Q4.attr(key_intValue),
-                result_pipelineProjectionFy2_Q1.attr(key_intValue),
-                result_pipelineProjectionFy2_Q2.attr(key_intValue),
-                result_pipelineProjectionFy2_Q3.attr(key_intValue),
-                result_pipelineProjectionFy2_Q4.attr(key_intValue)],
+                data: chartData_PipelineProjection,
                 borderColor: '#61bce5',
                 backgroundColor: '#61bce5',
                 yAxisID: "y"
@@ -797,6 +790,24 @@ function updateCharts() {
     chartData_ReferralTarget[5] = result_referralTargetFy2_Q2.attr(key_intValue);
     chartData_ReferralTarget[6] = result_referralTargetFy2_Q3.attr(key_intValue);
     chartData_ReferralTarget[7] = result_referralTargetFy2_Q4.attr(key_intValue);
+
+    chartData_PipelineProjection[0] = result_pipelineProjectionFy1_Q1.attr(key_intValue);
+    chartData_PipelineProjection[1] = result_pipelineProjectionFy1_Q2.attr(key_intValue);
+    chartData_PipelineProjection[2] = result_pipelineProjectionFy1_Q3.attr(key_intValue);
+    chartData_PipelineProjection[3] = result_pipelineProjectionFy1_Q4.attr(key_intValue);
+    chartData_PipelineProjection[4] = result_pipelineProjectionFy2_Q1.attr(key_intValue);
+    chartData_PipelineProjection[5] = result_pipelineProjectionFy2_Q2.attr(key_intValue);
+    chartData_PipelineProjection[6] = result_pipelineProjectionFy2_Q3.attr(key_intValue);
+    chartData_PipelineProjection[7] = result_pipelineProjectionFy2_Q4.attr(key_intValue);
+
+    chartData_BaselinePipeline[0] = result_baselinePipelineFy1_Q1.attr(key_intValue);
+    chartData_BaselinePipeline[1] = result_baselinePipelineFy1_Q2.attr(key_intValue);
+    chartData_BaselinePipeline[2] = result_baselinePipelineFy1_Q3.attr(key_intValue);
+    chartData_BaselinePipeline[3] = result_baselinePipelineFy1_Q4.attr(key_intValue);
+    chartData_BaselinePipeline[4] = result_baselinePipelineFy2_Q1.attr(key_intValue);
+    chartData_BaselinePipeline[5] = result_baselinePipelineFy2_Q2.attr(key_intValue);
+    chartData_BaselinePipeline[6] = result_baselinePipelineFy2_Q3.attr(key_intValue);
+    chartData_BaselinePipeline[7] = result_baselinePipelineFy2_Q4.attr(key_intValue);
 
     chart_PipelineImpact.update();
 }
