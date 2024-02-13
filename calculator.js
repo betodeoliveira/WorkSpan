@@ -773,6 +773,7 @@ function createCharts() {
                 borderColor: '#81bf5c',
                 backgroundColor: '#81bf5c',
                 fill: true,
+                below: 'rgb(0, 0, 255)',
                 yAxisID: "y"
             }, {
                 type: "line",
