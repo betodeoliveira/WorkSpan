@@ -114,7 +114,6 @@ const result_projectedRevenueTotal = $("#projected-revenue-total");
 const transactibilityScalar = 100;
 const transactibilityDelay = 0;
 const reciprocityScalar = 100;
-const reciprocityDelay = 2;
 /* We are not going to create results variables for all ramp types
 we will use 9 variables that will be updated based on the ramp that is selected. */
 /* Results - Ramps */
@@ -382,22 +381,22 @@ function calculateReciprocityRamp() {
     for (let i = 0; i < result_reciprocityRamp.length; i++) {
         switch (input_reciprocityRamp.val()) {
             case "linear":
-                _linearRamp = linearRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
+                _linearRamp = linearRamp(input_reciprocityQuartersBefore.val(), input_reciprocityQuarters.val(), reciprocityScalar, i);
                 _minValue = Math.min(_linearRamp, reciprocityScalar);
                 result_reciprocityRamp[i] = Math.max(_minValue, 0);
                 break;
 
             case "aggressive":
-                if (input_reciprocityQuarters.val() + 1 >= input_reciprocityQuarters.val() + reciprocityDelay) {
+                if (input_reciprocityQuarters.val() + 1 >= input_reciprocityQuarters.val() + input_reciprocityQuartersBefore.val()) {
                     result_reciprocityRamp[i] = transactibilityScalar;
                 }
                 else {
-                    result_reciprocityRamp[i] = aggressiveRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
+                    result_reciprocityRamp[i] = aggressiveRamp(input_reciprocityQuartersBefore.val(), input_reciprocityQuarters.val(), reciprocityScalar, i);
                 }
                 break;
 
             case "compounding":
-                result_reciprocityRamp[i] = compoundingRamp(reciprocityDelay, input_reciprocityQuarters.val(), reciprocityScalar, i);
+                result_reciprocityRamp[i] = compoundingRamp(input_reciprocityQuartersBefore.val(), input_reciprocityQuarters.val(), reciprocityScalar, i);
                 break;
         }
     }
