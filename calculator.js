@@ -771,14 +771,14 @@ function createCharts() {
                 label: "Baseline Plan: Revenue",
                 data: chartData_BaselineRevenue,
                 borderColor: '#b7b7b7',
-                backgroundColor: '#b7b7b7',
+                backgroundColor: '#ffffff',
                 yAxisID: "y"
             }, {
                 type: "line",
                 label: "Projected Revenue Impact",
                 data: chartData_RevenueImpact,
                 borderColor: '#81bf5c',
-                backgroundColor: '#81bf5c',
+                backgroundColor: '#ffffff',
                 below: 'rgb(0, 0, 255)',
                 yAxisID: "y"
             }],
