@@ -772,10 +772,6 @@ function createCharts() {
                 data: chartData_BaselineRevenue,
                 borderColor: '#b7b7b7',
                 backgroundColor: '#b7b7b7',
-                fill: {
-                    target: 'origin',
-                    above: '#f5f5f5'
-                },
                 yAxisID: "y"
             }, {
                 type: "line",
@@ -783,10 +779,6 @@ function createCharts() {
                 data: chartData_RevenueImpact,
                 borderColor: '#81bf5c',
                 backgroundColor: '#81bf5c',
-                fill: {
-                    target: 'origin',
-                    above: '#b1f18a'
-                },
                 below: 'rgb(0, 0, 255)',
                 yAxisID: "y"
             }],
