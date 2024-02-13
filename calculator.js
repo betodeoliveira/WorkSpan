@@ -772,19 +772,28 @@ function createCharts() {
                 data: chartData_RevenueImpact,
                 borderColor: '#81bf5c',
                 backgroundColor: '#81bf5c',
-                fill: true
+                fill: true,
+                yAxisID: "y"
             }, {
                 type: "line",
                 label: "Baseline Plan: Revenue",
                 data: chartData_BaselineRevenue,
                 borderColor: '#b7b7b7',
                 backgroundColor: '#b7b7b7',
-                fill: true
+                fill: true,
+                yAxisID: "y"
         }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
         },
         options: {
-            responsive: true
+            responsive: true,
+            scales: {
+                y: {
+                    type: "linear",
+                    display: true,
+                    position: "left"
+                }
+            }
         }
     });
 }
