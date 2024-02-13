@@ -445,14 +445,14 @@ function compoundingRamp(delay, duration, limit, period) {
 }
 
 function calculateMarketplaceRamp() {
-    let _marketplaceRampFy1_Q1 = (result_transactibilityRamp[0] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy1_Q2 = (result_transactibilityRamp[1] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy1_Q3 = (result_transactibilityRamp[2] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy1_Q4 = (result_transactibilityRamp[3] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy2_Q1 = (result_transactibilityRamp[4] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy2_Q2 = (result_transactibilityRamp[5] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy2_Q3 = (result_transactibilityRamp[6] * input_transactabilityAssumption.attr(key_intValue));
-    let _marketplaceRampFy2_Q4 = (result_transactibilityRamp[7] * input_transactabilityAssumption.attr(key_intValue));
+    let _marketplaceRampFy1_Q1 = (result_transactibilityRamp[0] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy1_Q2 = (result_transactibilityRamp[1] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy1_Q3 = (result_transactibilityRamp[2] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy1_Q4 = (result_transactibilityRamp[3] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy2_Q1 = (result_transactibilityRamp[4] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy2_Q2 = (result_transactibilityRamp[5] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy2_Q3 = (result_transactibilityRamp[6] * (input_transactabilityAssumption.attr(key_intValue) / 100));
+    let _marketplaceRampFy2_Q4 = (result_transactibilityRamp[7] * (input_transactabilityAssumption.attr(key_intValue) / 100));
     /* Save raw values */
     result_marketplaceRampFy1_Q1.attr(key_intValue, _marketplaceRampFy1_Q1);
     result_marketplaceRampFy1_Q2.attr(key_intValue, _marketplaceRampFy1_Q2);
