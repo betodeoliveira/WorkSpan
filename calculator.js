@@ -771,7 +771,7 @@ function createCharts() {
                 label: "Baseline Plan: Revenue",
                 data: chartData_BaselineRevenue,
                 borderColor: '#b7b7b7',
-                backgroundColor: '#b7b7b7',
+                backgroundColor: 'rgba(129, 191, 92, 50)',
                 fill: true,
                 yAxisID: "y"
             }, {
