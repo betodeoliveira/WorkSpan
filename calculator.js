@@ -854,4 +854,5 @@ function updateCharts() {
     chartData_BaselineRevenue[7] = result_baselineRevenueFy2_Q4.attr(key_intValue);
 
     chart_PipelineImpact.update();
+    chart_RevenueImpact.update();
 }
