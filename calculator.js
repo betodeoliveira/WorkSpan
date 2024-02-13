@@ -119,6 +119,21 @@ we will use 9 variables that will be updated based on the ramp that is selected.
 /* Results - Ramps */
 let result_transactibilityRamp = new Array(9);
 let result_reciprocityRamp = new Array(9);
+/* Chart.js Script */
+let scriptChartJS = document.createElement("script");
+scriptChartJS.src = "https://cdn.jsdelivr.net/npm/chart.js";
+scriptChartJS.onload = function () {
+    createCharts();
+    updateCharts();
+}
+document.head.appendChild(scriptChartJS);
+let chart_PipelineImpact, chart_RevenueImpact;
+let chartData_ReferralProjection = new Array(8);
+let chartData_ReferralTarget = new Array(8);
+let chartData_PipelineProjection = new Array(8);
+let chartData_BaselinePipeline = new Array(8);
+let chartData_RevenueImpact = new Array(8);
+let chartData_BaselineRevenue = new Array(8);
 /* General Variables */
 const key_intValue = "internal-value";
 let isInitialized = false;
@@ -651,20 +666,6 @@ function projectedRevenueFormula(baselineRevenue, revenueImpact, referralProject
     return _result;
 }
 
-/* Chart.js Script */
-let scriptChartJS = document.createElement("script");
-scriptChartJS.src = "https://cdn.jsdelivr.net/npm/chart.js";
-scriptChartJS.onload = function () {
-    createCharts();
-    updateCharts();
-}
-document.head.appendChild(scriptChartJS);
-let chart_PipelineImpact;
-let chartData_ReferralProjection = new Array(8);
-let chartData_ReferralTarget = new Array(8);
-let chartData_PipelineProjection = new Array(8);
-let chartData_BaselinePipeline = new Array(8);
-
 function runCalculations() {
     /* Run calculations */
     calculateCloudSalesAssumptions();
@@ -762,6 +763,28 @@ function createCharts() {
             }
         }
     });
+
+    chart_RevenueImpact = new Chart("chartRevenueImpact", {
+        data: {
+            datasets: [{
+                type: "line",
+                label: "Projected Revenue Impact",
+                data: chartData_RevenueImpact,
+                borderColor: '#81bf5c',
+                backgroundColor: '#81bf5c',
+            }, {
+                type: "line",
+                label: "Baseline Plan: Revenue",
+                data: chartData_BaselineRevenue,
+                borderColor: '#b7b7b7',
+                backgroundColor: '#b7b7b7',
+        }],
+            labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
+        },
+        options: {
+            responsive: true
+        }
+    });
 }
 
 function updateCharts() {
@@ -800,6 +823,24 @@ function updateCharts() {
     chartData_BaselinePipeline[5] = result_baselinePipelineFy2_Q2.attr(key_intValue);
     chartData_BaselinePipeline[6] = result_baselinePipelineFy2_Q3.attr(key_intValue);
     chartData_BaselinePipeline[7] = result_baselinePipelineFy2_Q4.attr(key_intValue);
+
+    chartData_RevenueImpact[0] = result_revenueImpactFy1_Q1.attr(key_intValue);
+    chartData_RevenueImpact[1] = result_revenueImpactFy1_Q2.attr(key_intValue);
+    chartData_RevenueImpact[2] = result_revenueImpactFy1_Q3.attr(key_intValue);
+    chartData_RevenueImpact[3] = result_revenueImpactFy1_Q4.attr(key_intValue);
+    chartData_RevenueImpact[4] = result_revenueImpactFy2_Q1.attr(key_intValue);
+    chartData_RevenueImpact[5] = result_revenueImpactFy2_Q2.attr(key_intValue);
+    chartData_RevenueImpact[6] = result_revenueImpactFy2_Q3.attr(key_intValue);
+    chartData_RevenueImpact[7] = result_revenueImpactFy2_Q4.attr(key_intValue);
+
+    chartData_BaselineRevenue[0] = result_baselineRevenueFy1_Q1.attr(key_intValue);
+    chartData_BaselineRevenue[1] = result_baselineRevenueFy1_Q2.attr(key_intValue);
+    chartData_BaselineRevenue[2] = result_baselineRevenueFy1_Q3.attr(key_intValue);
+    chartData_BaselineRevenue[3] = result_baselineRevenueFy1_Q4.attr(key_intValue);
+    chartData_BaselineRevenue[4] = result_baselineRevenueFy2_Q1.attr(key_intValue);
+    chartData_BaselineRevenue[5] = result_baselineRevenueFy2_Q2.attr(key_intValue);
+    chartData_BaselineRevenue[6] = result_baselineRevenueFy2_Q3.attr(key_intValue);
+    chartData_BaselineRevenue[7] = result_baselineRevenueFy2_Q4.attr(key_intValue);
 
     chart_PipelineImpact.update();
 }
