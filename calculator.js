@@ -726,14 +726,7 @@ function createCharts() {
             }, {
                 type: "line",
                 label: "Outgoing Opp Referral Target",
-                data: [result_referralTargetFy1_Q1.attr(key_intValue),
-                formatNumber(result_referralTargetFy1_Q2.attr(key_intValue)),
-                formatNumber(result_referralTargetFy1_Q3.attr(key_intValue)),
-                formatNumber(result_referralTargetFy1_Q4.attr(key_intValue)),
-                formatNumber(result_referralTargetFy2_Q1.attr(key_intValue)),
-                formatNumber(result_referralTargetFy2_Q2.attr(key_intValue)),
-                formatNumber(result_referralTargetFy2_Q3.attr(key_intValue)),
-                formatNumber(result_referralTargetFy2_Q4.attr(key_intValue))],
+                data: chartData_ReferralTarget,
                 borderColor: '#eba944',
                 backgroundColor: '#eba944',
                 yAxisID: "y1"
