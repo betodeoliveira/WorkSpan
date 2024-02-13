@@ -664,7 +664,6 @@ let chart_PipelineImpact;
 let charData_ReferralProjection = new Array(8);
 let charData_ReferralTarget = new Array(8);
 let charData_PipelineProjection = new Array(8);
-let charData_PipelineProjection = new Array(8);
 let charData_BaselinePipeline = new Array(8);
 
 function runCalculations() {
