@@ -661,10 +661,10 @@ scriptChartJS.onload = function () {
 }
 document.head.appendChild(scriptChartJS);
 let chart_PipelineImpact;
-let charData_ReferralProjection = new Array(8);
-let charData_ReferralTarget = new Array(8);
-let charData_PipelineProjection = new Array(8);
-let charData_BaselinePipeline = new Array(8);
+let chartData_ReferralProjection = new Array(8);
+let chartData_ReferralTarget = new Array(8);
+let chartData_PipelineProjection = new Array(8);
+let chartData_BaselinePipeline = new Array(8);
 
 function runCalculations() {
     /* Run calculations */
@@ -719,7 +719,7 @@ function createCharts() {
             datasets: [{
                 type: "line",
                 label: "Incoming Oppotunity Referral Projection",
-                data: charData_ReferralProjection,
+                data: chartData_ReferralProjection,
                 borderColor: '#8c1af5',
                 backgroundColor: '#8c1af5',
                 yAxisID: "y1"
@@ -787,14 +787,23 @@ function createCharts() {
 }
 
 function updateCharts() {
-    charData_ReferralProjection[0] = result_referralProjectionFy1_Q1.attr(key_intValue);
-    charData_ReferralProjection[1] = result_referralProjectionFy1_Q2.attr(key_intValue);
-    charData_ReferralProjection[2] = result_referralProjectionFy1_Q3.attr(key_intValue);
-    charData_ReferralProjection[3] = result_referralProjectionFy1_Q4.attr(key_intValue);
-    charData_ReferralProjection[4] = result_referralProjectionFy2_Q1.attr(key_intValue);
-    charData_ReferralProjection[5] = result_referralProjectionFy2_Q2.attr(key_intValue);
-    charData_ReferralProjection[6] = result_referralProjectionFy2_Q3.attr(key_intValue);
-    charData_ReferralProjection[7] = result_referralProjectionFy2_Q4.attr(key_intValue);
+    chartData_ReferralProjection[0] = result_referralProjectionFy1_Q1.attr(key_intValue);
+    chartData_ReferralProjection[1] = result_referralProjectionFy1_Q2.attr(key_intValue);
+    chartData_ReferralProjection[2] = result_referralProjectionFy1_Q3.attr(key_intValue);
+    chartData_ReferralProjection[3] = result_referralProjectionFy1_Q4.attr(key_intValue);
+    chartData_ReferralProjection[4] = result_referralProjectionFy2_Q1.attr(key_intValue);
+    chartData_ReferralProjection[5] = result_referralProjectionFy2_Q2.attr(key_intValue);
+    chartData_ReferralProjection[6] = result_referralProjectionFy2_Q3.attr(key_intValue);
+    chartData_ReferralProjection[7] = result_referralProjectionFy2_Q4.attr(key_intValue);
+
+    chartData_ReferralTarget[0] = result_referralTargetFy1_Q1.attr(key_intValue);
+    chartData_ReferralTarget[1] = result_referralTargetFy1_Q2.attr(key_intValue);
+    chartData_ReferralTarget[2] = result_referralTargetFy1_Q3.attr(key_intValue);
+    chartData_ReferralTarget[3] = result_referralTargetFy1_Q4.attr(key_intValue);
+    chartData_ReferralTarget[4] = result_referralTargetFy2_Q1.attr(key_intValue);
+    chartData_ReferralTarget[5] = result_referralTargetFy2_Q2.attr(key_intValue);
+    chartData_ReferralTarget[6] = result_referralTargetFy2_Q3.attr(key_intValue);
+    chartData_ReferralTarget[7] = result_referralTargetFy2_Q4.attr(key_intValue);
 
     chart_PipelineImpact.update();
 }
