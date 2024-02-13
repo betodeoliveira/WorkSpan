@@ -740,14 +740,7 @@ function createCharts() {
             }, {
                 type: "bar",
                 label: "Baseline Target: Pipeline ($)",
-                data: [result_baselinePipelineFy1_Q1.attr(key_intValue),
-                result_baselinePipelineFy1_Q2.attr(key_intValue),
-                result_baselinePipelineFy1_Q3.attr(key_intValue),
-                result_baselinePipelineFy1_Q4.attr(key_intValue),
-                result_baselinePipelineFy2_Q1.attr(key_intValue),
-                result_baselinePipelineFy2_Q2.attr(key_intValue),
-                result_baselinePipelineFy2_Q3.attr(key_intValue),
-                result_baselinePipelineFy2_Q4.attr(key_intValue)],
+                data: chartData_BaselinePipeline,
                 borderColor: '#b7b7b7',
                 backgroundColor: '#b7b7b7',
                 yAxisID: "y"
