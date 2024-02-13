@@ -768,6 +768,14 @@ function createCharts() {
         data: {
             datasets: [{
                 type: "line",
+                label: "Baseline Plan: Revenue",
+                data: chartData_BaselineRevenue,
+                borderColor: '#b7b7b7',
+                backgroundColor: '#b7b7b7',
+                fill: true,
+                yAxisID: "y"
+            }, {
+                type: "line",
                 label: "Projected Revenue Impact",
                 data: chartData_RevenueImpact,
                 borderColor: '#81bf5c',
@@ -775,15 +783,7 @@ function createCharts() {
                 fill: true,
                 below: 'rgb(0, 0, 255)',
                 yAxisID: "y"
-            }, {
-                type: "line",
-                label: "Baseline Plan: Revenue",
-                data: chartData_BaselineRevenue,
-                borderColor: '#b7b7b7',
-                backgroundColor: '#b7b7b7',
-                fill: true,
-                yAxisID: "y"
-        }],
+            }],
             labels: ["Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4"],
         },
         options: {
