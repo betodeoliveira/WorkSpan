@@ -728,7 +728,7 @@ function createCharts() {
                 label: "Outgoing Opp Referral Target",
                 data: chartData_ReferralTarget,
                 borderColor: '#eba944',
-                backgroundColor: '#eba944',
+                backgroundColor: '#ffffff',
                 yAxisID: "y1"
             }, {
                 type: "bar",
