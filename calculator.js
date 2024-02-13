@@ -721,6 +721,7 @@ function createCharts() {
                 label: "Incoming Oppotunity Referral Projection",
                 data: chartData_ReferralProjection,
                 borderColor: '#8c1af5',
+                backgroundColor: '#ffffff',
                 yAxisID: "y1"
             }, {
                 type: "line",
@@ -734,6 +735,7 @@ function createCharts() {
                 label: "Pipeline Increase Projection",
                 data: chartData_PipelineProjection,
                 borderColor: '#61bce5',
+                backgroundColor: '#61bce5',
                 yAxisID: "y"
             }, {
                 type: "bar",
